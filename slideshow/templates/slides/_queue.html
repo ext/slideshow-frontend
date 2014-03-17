@@ -1,0 +1,39 @@
+<div class="queuewrapper" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:py="http://genshi.edgewall.org/"
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	lang="en">
+	<span class="title">
+		${queue.name}
+		<py:if test="queue.id > 0">
+			(
+			<py:choose test="queue.id == active.id">
+				<py:when test="True">active</py:when>
+				<py:when test="False"><a href="/queue/activate/${queue.id}">set as active</a></py:when>
+			</py:choose>,
+			<py:choose test="queue.loop">
+				<py:when test="True"><a href="/queue/loop/${queue.id}/0">Disable looping</a></py:when>
+				<py:when test="False"><a href="/queue/loop/${queue.id}/1">Enable looping</a></py:when>
+			</py:choose>
+			)
+		</py:if>
+	</span><br/>
+
+	<div class="queue" id="${queue.div}">
+		<py:for each="slide in queue.slides">
+			<div py:attrs="slide.attributes" id="slide_${slide.id}">
+				<div class="preview">
+					<img src="/slides/show/${slide.id}/200/200" />
+				</div>
+				<div class="menu">
+					<span class="zoom" py:if="slide.assembler.is_viewable()"><a href="/slides/show/${slide.id}">Full</a></span>
+					<span class="play" py:if="slide.assembler.is_playable()"><a href="/slides/play/${slide.id}">Play</a></span>
+					<span class="edit" py:if="slide.assembler.is_editable()"><a href="/slides/edit/${slide.id}">Edit</a></span>
+					<span class="hide"><a href="#" onclick="slide.deactivate(${slide.id}, this); return false;">Hide</a></span>
+					<span class="show"><a href="#" onclick="slide.activate(${slide.id}, this);   return false;">Show</a></span>
+					<span class="delete"><a href="#" onclick="slide.delete(${slide.id}, event.shiftKey); return false;">Delete</a></span>
+				</div>
+			</div>
+		</py:for>
+	</div>
+	<br style="clear: left;" />
+</div>

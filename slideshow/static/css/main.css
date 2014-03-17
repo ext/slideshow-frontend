@@ -147,6 +147,16 @@ body {
     font-weight: bold;
 }
 
+#active_queue {
+		float: right;
+		width: 50%;
+}
+
+#other_queue {
+		margin-right: 50%;
+		padding-right: 20px;
+}
+
 .queuewrapper {
 	margin-top: 10px;
 	margin-bottom: 10px;
