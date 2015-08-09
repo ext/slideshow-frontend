@@ -99,7 +99,6 @@ var slide = (function(){
 			$("#delete_dialog").dialog({
 				modal: true,
 				resizable: false,
-				position: 'center',
 				width: 834, /* 800 + 17 + 17 (padding) */
 				height: 700,
 			});
