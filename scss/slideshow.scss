@@ -129,17 +129,21 @@ body {
 	margin-top: 10px;
 	margin-bottom: 10px;
 	border: 1px solid #ccc;
-	padding: 0px 10px 10px 10px;
+	padding-top: 5px;
+	font-size: 0;
+	position: relative;
 }
 
 .queuewrapper .title {
-	margin: 0 0 0 10px;
 	padding: 0 7px;
 	background: white;
-	position: relative; top: -10px;
-	display: inline;
-	font-size: 0.9em;
+	position: absolute;
+	top: -6px;
+	left: 10px;
+	display: inline-block;
+	font-size: 12px;
 	font-family: sans-serif;
+	font-weight: normal;
 }
 
 .queuewrapper .title a {
@@ -147,21 +151,30 @@ body {
 }
 
 .queue {
-	float: left;
 	width: 100%;
-	min-height: 50px;
 }
 
 .queue.hover {
 	background: #ccc;
 }
 
-.slide {
-	float: left;
+.item {
+	padding: 8px;
+}
 
-	margin-right: 10px;
-	padding: 0;
-	border:1px solid #aaa;
+.slide {
+	border: 1px solid #aaa;
+	position: relative;
+}
+
+.item, .slide_placeholder {
+	display: inline-block;
+}
+
+.slide_placeholder {
+	border: 3px dashed #666;
+	height: 227px;
+	width: 200px;
 }
 
 .slide img {
@@ -188,10 +201,20 @@ body {
 }
 
 .slide .menu {
+	box-sizing: border-box;
+	display: none;
+	position: absolute;
+	bottom: 0;
 	padding: 5px;
-
-	font-size: 0.7em;
+	width: 100%;
+	font-size: 10px;
 	font-family: sans-serif;
+	background: rgba(255,255,255,0.9);
+}
+
+.slide:hover .menu,
+.slide.in .menu {
+	display: block;
 }
 
 .slide .menu a {
@@ -233,14 +256,6 @@ body {
 .slide .delete {
 	padding: 2px 0px 2px 16px;
 	background: transparent url('/static/icon/delete.png') no-repeat center left;
-}
-
-.slide_placeholder {
-	border: 3px dashed #666;
-	float: left;
-	height: 227px;
-	width: 200px;
-	margin-right: 10px;
 }
 
 #log .fatal {
