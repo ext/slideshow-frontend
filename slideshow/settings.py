@@ -307,7 +307,7 @@ class ItemStatic(Item):
     default = None
 
     def __init__(self, *args, **kwargs):
-        kwargs['cls'] = kwargs.get('cls', '') + ' static'
+        kwargs['class'] = (kwargs.get('class', '') + ' static').strip()
         Item.__init__(self, *args, **kwargs)
 
     def __str__(self):
