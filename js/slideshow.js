@@ -51,7 +51,14 @@ var queue = (function(){
 				$(id).bind('updated', updated);
 				$(id).sortable({
 					connectWith: other,
-					placeholder: 'slide_placeholder',
+					placeholder: {
+						element: function(){
+							return $('<div class="item"><div class="placeholder"></div></div>')[0];
+						},
+						update: function(){
+							return;
+						},
+					},
 					tolerance: 'pointer',
 					distance: 10,
 					update: function(){

@@ -8,6 +8,7 @@
 * {
 	margin: 0;
 	padding: 0;
+	box-sizing: border-box;
 }
 
 body {
@@ -152,6 +153,9 @@ body {
 
 .queue {
 	width: 100%;
+
+	/* min height when the queue is empty */
+	min-height: 50px;
 }
 
 .queue.hover {
@@ -160,20 +164,17 @@ body {
 
 .item {
 	padding: 8px;
+	display: inline-block;
+	vertical-align: bottom;
 }
 
 .slide {
-	border: 1px solid #aaa;
 	position: relative;
 }
 
-.item, .slide_placeholder {
-	display: inline-block;
-}
-
-.slide_placeholder {
+.item .placeholder {
 	border: 3px dashed #666;
-	height: 227px;
+	height: 200px;
 	width: 200px;
 }
 
@@ -201,7 +202,6 @@ body {
 }
 
 .slide .menu {
-	box-sizing: border-box;
 	display: none;
 	position: absolute;
 	bottom: 0;
