@@ -102,33 +102,28 @@ var slide = (function(){
 				return;
 			}
 
-			$("#delete_dialog img").attr('src', '/slides/show/' + id + '/800/600');
-			$("#delete_dialog").dialog({
-				modal: true,
-				resizable: false,
-				width: 834, /* 800 + 17 + 17 (padding) */
-				height: 700,
-			});
+			var dialog = $('#delete_dialog');
+			dialog.data('slide', id);
+			dialog.find('.modal-body img').attr('src', '/slides/show/' + id + '/800/600');
+			dialog.modal('show');
 		},
 
 		/* delete slide without confirmation */
 		real_delete: function(id){
-			$.ajax({
+			return $.ajax({
 				type: "POST",
 				url: "/slides/ajax/delete",
 				data: {id: id},
 				dataType: 'json',
 				success: function(data){
 					if ( data.success ){
-						$('#slide_' + id).remove();
+						$('#slide_' + id).parent().remove();
 					} else {
 						alert(data.message);
 					}
-					$('#delete_dialog').dialog('close');
 				},
 				error: function(x, status, error){
 					alert(status + '\n' + error);
-					$('#delete_dialog').dialog('close');
 				},
 			});
 		},
@@ -170,7 +165,16 @@ $(document).ready(function(){
 	$('#delete_cancel').bind('click', function(){
 		$('#delete_dialog').dialog('close');
 	});
-	$('#delete_confirm').bind('click', slide.real_delete);
+	$('#delete_confirm').click(function(){
+		var dialog = $(this).parents('.modal');
+		var id = dialog.data('slide');
+		if ( typeof(id) != 'undefined' ){
+			slide.real_delete(id).always(function(){
+				$('#delete_dialog').modal('hide');
+			});
+			dialog.removeData('slide');
+		}
+	});
 
 	/* enable hoverintent on slides */
 	$('.item .slide').hoverIntent({

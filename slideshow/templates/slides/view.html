@@ -15,9 +15,22 @@
 	<body>
 		<h2>Current slides</h2>
 
-		<div id="delete_dialog" title="Are you sure you want to delete ...?" style="display:none;">
-			<img src="" alt="" />
-			<button id="delete_confirm">Delete</button> <button id="delete_cancel">Cancel</button>
+		<div id="delete_dialog" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">Are you sure you want to delete the slide?</h4>
+					</div>
+					<div class="modal-body">
+						<img src="" alt="" />
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+						<button type="button" class="btn btn-danger" id="delete_confirm">Delete</button>
+					</div>
+				</div>
+			</div>
 		</div>
 
 		<?python empty_queue = active.id == 0 or len(active) == 0 ?>
