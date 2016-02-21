@@ -8,4 +8,5 @@
 
 /node_modules
 /slideshow/static/css
+/slideshow/static/fonts
 /slideshow/static/js
