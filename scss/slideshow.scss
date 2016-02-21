@@ -125,16 +125,6 @@ body {
 	font-weight: bold;
 }
 
-#active_queue {
-		float: right;
-		width: 50%;
-}
-
-#other_queue {
-		margin-right: 50%;
-		padding-right: 20px;
-}
-
 .queuewrapper {
 	margin-top: 10px;
 	margin-bottom: 10px;
@@ -253,10 +243,6 @@ body {
 	margin-right: 10px;
 }
 
-h1 {
-	text-shadow: #bbb 1px 1px 1px;
-}
-
 #log .fatal {
 		color: red;
 		font-weight: bold;
@@ -271,27 +257,16 @@ h1 {
 	text-align: right;
 }
 
-#assembler_text .wrapper {
-		width: 1000px;
-}
+#assembler_text {
+	img {
+		max-width: 100%;
+	}
 
-#assembler_text .preview {
-		float: right;
-}
-
-#assembler_text .fields {
-		width: 300px;
-}
-
-#assembler_text .fields input[type='text'] {
-		width: 280px;
-}
-
-#assembler_text .fields textarea {
-		width: 280px;
-}
-
-#assembler_text .help {
+	p.help {
 		font-size: 0.8em;
-		width: 300px;
+	}
+}
+
+.actions {
+	@extend .clearfix;
 }

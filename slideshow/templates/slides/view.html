@@ -23,18 +23,18 @@
 			The current active queue is empty. You can create some slides and move them into the active queue.
 		</div>
 
-		<div id="active_queue">
-			<h2>Active</h2>
-			<?python queue = active ?>
-			<xi:include href="_queue.html" />
-		</div>
-
-		<div id="other_queue">
-			<h2>Available</h2>
-
-			<py:for each="queue in [x for x in queues if x.id != active.id]">
+		<div class="row">
+			<div id="other_queue" class="col-md-6">
+				<h2>Available</h2>
+				<py:for each="queue in [x for x in queues if x.id != active.id]">
+					<xi:include href="_queue.html" />
+				</py:for>
+			</div>
+			<div id="active_queue" class="col-md-6">
+				<h2>Active</h2>
+				<?python queue = active ?>
 				<xi:include href="_queue.html" />
-			</py:for>
+			</div>
 		</div>
 	</body>
 </html>
