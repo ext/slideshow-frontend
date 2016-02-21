@@ -1,10 +1,13 @@
+@import "common";
+@import "configurator";
+
 * {
-    margin: 0;
-    padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 body {
-    padding: 10px;
+	padding: 10px;
 }
 
 .mono {
@@ -112,39 +115,39 @@ body {
 }
 
 #content fieldset {
-    margin: 0 2px;
-    padding: 5px 10px 12px 10px;
+	margin: 0 2px;
+	padding: 5px 10px 12px 10px;
 }
 
 #content p {
-    margin: 16px 0;
+	margin: 16px 0;
 }
 
 #content ul {
-    padding-left: 40px;
+	padding-left: 40px;
 }
 
 #content .folding {
-    text-decoration: none;
-    color: #000;
-    padding-left: 16px;
+	text-decoration: none;
+	color: #000;
+	padding-left: 16px;
 }
 
 #content .fold-expanded {
-    background: url('/static/icon/bullet_toggle_minus.png');
-    background-position: 0 6px;
-    background-repeat: no-repeat;
+	background: url('/static/icon/bullet_toggle_minus.png');
+	background-position: 0 6px;
+	background-repeat: no-repeat;
 }
 
 #content .fold-collapsed {
-    background: url('/static/icon/bullet_toggle_plus.png');
-    background-position: 0 6px;
-    background-repeat: no-repeat;
+	background: url('/static/icon/bullet_toggle_plus.png');
+	background-position: 0 6px;
+	background-repeat: no-repeat;
 }
 
 #content .assembler legend {
-    font-size: 1.3em;
-    font-weight: bold;
+	font-size: 1.3em;
+	font-weight: bold;
 }
 
 #active_queue {
@@ -175,7 +178,7 @@ body {
 }
 
 .queuewrapper .title a {
-    color: #00e;
+	color: #00e;
 }
 
 .queue {
@@ -197,26 +200,26 @@ body {
 }
 
 .slide img {
-    cursor:		move;
+	cursor:		move;
 }
 
 .disabled {
 }
 
 .disabled .preview {
-    background: url('images/ui-bg_diagonals-thick_20_666666_40x40.png');
+	background: url('images/ui-bg_diagonals-thick_20_666666_40x40.png');
 }
 
 .disabled img {
-    opacity: 0.2;
+	opacity: 0.2;
 }
 
 .disabled .hide {
-    display: none;
+	display: none;
 }
 
 .disabled .show {
-    display: inline !important;
+	display: inline !important;
 }
 
 .slide .menu {
@@ -268,15 +271,15 @@ body {
 }
 
 .slide_placeholder {
-    border: 3px dashed #666;
-    float: left;
-    height: 227px;
-    width: 200px;
-    margin-right: 10px;
+	border: 3px dashed #666;
+	float: left;
+	height: 227px;
+	width: 200px;
+	margin-right: 10px;
 }
 
 h1 {
-    text-shadow: #bbb 1px 1px 1px;
+	text-shadow: #bbb 1px 1px 1px;
 }
 
 #log .fatal {
@@ -290,7 +293,7 @@ h1 {
 }
 
 #delete_dialog {
-    text-align: right;
+	text-align: right;
 }
 
 #assembler_text .wrapper {

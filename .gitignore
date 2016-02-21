@@ -4,5 +4,8 @@
 .\#*
 
 *.py[oc]
+*.map
 
 /node_modules
+/slideshow/static/css
+/slideshow/static/js
