@@ -71,6 +71,7 @@ module.exports = function(grunt){
 					'slideshow/static/js/libs.min.js': [
 						'node_modules/jquery/dist/jquery.js',
 						'node_modules/bootstrap-sass/assets/javascripts/bootstrap.js',
+						'node_modules/jquery-hoverintent/jquery.hoverIntent.js',
 					],
 				},
 			},

@@ -172,6 +172,17 @@ $(document).ready(function(){
 	});
 	$('#delete_confirm').bind('click', slide.real_delete);
 
+	/* enable hoverintent on slides */
+	$('.item .slide').hoverIntent({
+		over: function(){
+			$(this).addClass('in');
+		},
+		out: function(){
+			$(this).removeClass('in');
+		},
+		timeout: 200,
+	});
+
 	/* fold slide upload fieldsets */
 	var $f = $('.foldable');
 	$f.foldable({
