@@ -1,4 +1,4 @@
-## Slideshow
+## Slideshow Frontend
 
 Slideshow is a kiosk-style application for showing text, image and video in a continious loop on monitors and projectors. Content is edited and updated directly in using a webgui. The application is split into two packages, a backend and a frontend. The backend is written in C++ and OpenGL and the frontend using python. Currently the frontend is very GNU/Linux specific and will not run on any other platform but is meant to be as platform independent as possible, as long as it handles OpenGL.
 
@@ -15,33 +15,14 @@ Slideshow is a kiosk-style application for showing text, image and video in a co
 
 ## Requirements
 
-* automake-1.11 or later
-* DevIL
-* GLEW
-* libdaemon
-* libjson
-* libcurl
-* [datapack](https://github.com/ext/datapack)
-
-## Optional
-
-* SDL
-* sqlite3 or mysql
-* DBus
-* Ragel
+* python
+* cherrypy
+* genshi
 
 ## Debian/ubuntu requirements
 
-    sudo apt-get install build-essential libtool autoconf pkg-config ragel libdaemon-dev libdevil-dev libjson-c-dev libcurl4-openssl-dev libsqlite3-dev python-cherrypy3 python-genshi python-xlib python-pythonmagick python-gamin
+    sudo apt-get install python-cherrypy3 python-genshi python-xlib python-pythonmagick python-gamin python-setuptools python-pip
     sudo pip install htmlcolor
-
-## Building daemon
-
-    autoreconf -si
-    mkdir build
-    cd build
-    ../configure --with-sdl
-    make
 
 # Usage
 
