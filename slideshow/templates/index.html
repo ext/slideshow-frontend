@@ -41,33 +41,43 @@
 	?>
 
 	<py:match path="body" once="true">
-	<body py:attrs="select('@*')">
-		<div id="header">
-			<h1>${Settings()['Slideshow.Title']}</h1>
-		</div>
+		<body py:attrs="select('@*')">
+			<header>
+				<nav class="navbar navbar-default">
+					<div class="container-fluid">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+							<a class="navbar-brand" href="/">${Settings()['Slideshow.Title']}</a>
+						</div>
 
-		<div id="bar">
-			<span class="daemonstatus">Status: <strong>${daemonstr}</strong></span>
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+							<ul id="menu" class="nav navbar-nav">
+								<py:for each="(i, (_, title, url)) in enumerate(menu.items)">
+									<li py:attrs="menu.attrs_li(i)" role="presentation">
+										<a href="${url}"><i></i> ${title}</a>
+									</li>
+								</py:for>
+							</ul>
 
-			<nav id="menu">
-				<ul class="nav nav-tabs">
-					<py:for each="(i, (_, title, url)) in enumerate(menu.items)">
-					<li py:attrs="menu.attrs_li(i)" role="presentation">
-						<a href="${url}"><i></i> ${title}</a>
-					</li>
-					</py:for>
-				</ul>
-			</nav>
-		</div>
+							<p class="navbar-text navbar-right daemonstatus">Status: <strong>${daemonstr}</strong></p>
+						</div>
+					</div>
+				</nav>
+			</header>
 
-		<div id="content">
-			${select('*|text()')}
-		</div>
+			<div id="content">
+				${select('*|text()')}
+			</div>
 
-		<div id="footer">
-			<p py:if="username is not None">Logged in as ${username} (<a href="/logout">logout</a>)</p>
-			<p>Powered by <a href="http://ext.github.com/slideshow">Slideshow 0.4.1</a></p>
-		</div>
-	</body>
+			<footer>
+				<p py:if="username is not None">Logged in as ${username} (<a href="/logout">logout</a>)</p>
+				<p>Powered by <a href="http://ext.github.com/slideshow">Slideshow 0.4.1</a></p>
+			</footer>
+		</body>
 	</py:match>
 </html>

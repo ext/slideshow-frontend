@@ -4,14 +4,12 @@
 @import "font-awesome";
 @import "common";
 
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+body {
+
 }
 
-body {
-	padding: 10px;
+#content {
+	padding: 0 10px;
 }
 
 .mono {
@@ -35,13 +33,8 @@ body {
 	color: #aaa;
 }
 
-.nav-tabs > li > a {
-	background: #f7f7f7;
-	border-bottom-color: $nav-tabs-border-color;
-}
-
-#bar {
-	font-size: 12px;
+.navbar-default {
+	background-image: linear-gradient(to bottom, #ffc 0%, #ffe 100%);
 }
 
 #menu {
@@ -69,24 +62,8 @@ body {
 }
 
 .daemonstatus {
-	float: right;
-	display: block;
-	border-radius: 4px 4px 0 0;
-	line-height: 1.42857;
-	border: 1px solid $nav-tabs-border-color;
-	border-bottom: 0;
-	padding: 10px 15px;
 	white-space: nowrap;
-	background: white;
-}
-
-#content {
-	clear:both;
-	background: white;
-	padding: 10px;
-	border-left: 1px solid black;
-	border-right: 1px solid black;
-	border-bottom: 1px solid black;
+	line-height: 19px;
 }
 
 #content fieldset {
