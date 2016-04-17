@@ -7,6 +7,10 @@ String.prototype.repeat = function(num){
 };
 
 var queue = function(){
+	function all_queues_except(id){
+		return queues.filter(function(x){ return x !== id; });
+	}
+
 	return {
 		sorting: function(){
 			/* test if queues exists on this page */
@@ -17,7 +21,7 @@ var queue = function(){
 			/* queues is a global variable */
 			for ( var i in queues ){
 				var id = queues[i];
-				var other = queues.filter(function(x){ return x !== id; });
+				var other = all_queues_except(id);
 				$(id).bind('updated', function() {
 					var current_id = '#' + $(this).attr('id');
 					var list = $(this).sortable('toArray');
