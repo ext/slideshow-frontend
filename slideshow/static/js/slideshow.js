@@ -210,7 +210,7 @@ function config_open(section){
 	console.log('open section ' + section);
 
 	/* reset current selection */
-	$('#sidebar a').attr('class','');
+	$('#sidebar a').attr('class', '');
 	$('.conf fieldset').hide();
 
 	$('#menu_'+section+' a').attr('class', 'selected');
