@@ -1,6 +1,21 @@
-
 .navbar-default {
+	//background-image: linear-gradient(to bottom, #ffc 0%, #ffe 100%);
+	background: transparent;
+	box-shadow: none;
+	border: none;
+	margin-bottom: 0;
+}
+
+body {
 	background-image: linear-gradient(to bottom, #ffc 0%, #ffe 100%);
+	background-size: 100% 50px;
+	background-repeat: no-repeat;
+}
+
+#content {
+	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15) inset, 0 1px 5px rgba(0, 0, 0, 0.075);
+	padding-top: 20px;
+	border-top: 1px solid #e7e7e7;
 }
 
 #menu {
@@ -30,4 +45,8 @@
 .daemonstatus {
 	white-space: nowrap;
 	line-height: 19px;
+
+	&.daemon-crashed strong {
+		color: #f00;
+	}
 }
