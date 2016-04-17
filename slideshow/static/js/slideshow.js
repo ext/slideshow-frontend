@@ -5,9 +5,6 @@ String.prototype.repeat = function(num){
 	return new Array( num + 1 ).join( this );
 };
 
-/* globals */
-var delete_id = undefined; /* which slide is about to be deleted */
-
 var queue = function(){
 	return {
 		sorting: function(){
@@ -86,10 +83,8 @@ var slide = function(){
 		/* show a confirmation dialog and delete if user confirms (exception
 		 * being if quick is true in which case it is deleted immediately) */
 		delete: function(id, quick){
-			delete_id = id;
-
 			if ( quick ){
-				slide.real_delete();
+				slide.real_delete(id);
 				return;
 			}
 
@@ -100,22 +95,19 @@ var slide = function(){
 				position: 'center',
 				width: 834, /* 800 + 17 + 17 (padding) */
 				height: 700,
-				close: function(){
-					delete_id = undefined;
-				},
 			});
 		},
 
 		/* delete slide without confirmation */
-		real_delete: function(){
+		real_delete: function(id){
 			$.ajax({
 				type: "POST",
 				url: "/slides/ajax/delete",
-				data: {id: delete_id},
+				data: {id: id},
 				dataType: 'json',
 				success: function(data){
 					if ( data.success ){
-						$('#slide_' + delete_id).remove();
+						$('#slide_' + id).remove();
 					} else {
 						alert(data.message);
 					}
