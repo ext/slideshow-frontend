@@ -3,7 +3,7 @@
 
 import cherrypy, os.path
 from slideshow.lib import queue, slide, template, browser as browser_factory
-from slideshow.settings import Settings, ItemCheckbox
+from slideshow.settings import Settings, ItemCheckbox, ValidationError
 import slideshow.daemon as daemon
 import slideshow.event as event
 import traceback
@@ -59,10 +59,16 @@ class Handler(object):
                     if k == 'Database.Password' and len(v) == 0:
                         continue
 
+                    item = settings.item(k)
+
+                    # hack to remove validation error
+                    if hasattr(item, 'message'):
+                        del item.message
+
                     try:
                         settings[k] = v
-                    except ValueError as e:
-                        settings.item(k).message = str(e)
+                    except (ValidationError, ValueError) as e:
+                        item.message = str(e)
                         error = True
 
             if not error:

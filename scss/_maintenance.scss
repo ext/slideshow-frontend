@@ -1,0 +1,23 @@
+.mono {
+	font-family:	monospace;
+	background:	#ccc;
+	padding:	5px;
+}
+
+#motd {
+	border:		3px solid red;
+	text-align:	center;
+	padding:	1em;
+}
+
+#log {
+	.fatal {
+		color: red;
+		font-weight: bold;
+	}
+
+	.warning {
+		color: yellow;
+		font-weight: bold;
+	}
+}

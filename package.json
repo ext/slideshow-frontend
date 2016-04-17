@@ -1,6 +1,6 @@
 {
   "name": "slideshow-frontend",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "",
   "repository": {
     "type": "git",
@@ -13,12 +13,19 @@
   "author": "David Sveningsson <ext@sidvind.com>",
   "license": "AGPL-3.0",
   "dependencies": {
+    "bootstrap-sass": "^3.3.6",
+    "font-awesome": "^4.6.1",
+    "jquery": "^2.2.3",
     "phantomjs-prebuilt": "^2.1.6"
   },
   "devDependencies": {
     "eslint": "^2.8.0",
     "grunt": "^0.4.5",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-uglify": "^0.11.1",
     "grunt-contrib-watch": "^0.6.1",
-    "grunt-eslint": "^18.1.0"
+    "grunt-eslint": "^18.1.0",
+    "grunt-sass": "^1.1.0",
+    "jquery-hoverintent": "1.8.1"
   }
 }

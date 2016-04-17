@@ -97,13 +97,31 @@ class Item:
 
     def _values(self):
         return dict(
-            title=self.title,
             type=self.typename,
             value=unicode(self._value),
         )
 
+    def _help_block(self):
+        text = self.description
+        if hasattr(self, 'message'):
+            text = self.message
+        if text:
+            return '<span class="help-block">{0}</span>'.format(text)
+        else:
+            return ''
+
+    def _wrap_group(self, content):
+        extra_class = ''
+        if hasattr(self, 'message'): extra_class = ' has-error'
+        return '<div class="form-group{extra_class}"><label class="control-label">{title}</label>{content}{help}</div>'.format(
+            extra_class=extra_class,
+            title=self.title,
+            help=self._help_block(),
+            content=content
+        )
+
     def __str__(self):
-        return '<input type="text" {0} value="{value}"/>'.format(self.attribute_string(), **self._values())
+        return self._wrap_group('<input class="form-control" type="text" {0} value="{value}"/>'.format(self.attribute_string(), **self._values()))
 
     def set(self, value, rollback=False):
         tmp = self._value
@@ -136,11 +154,11 @@ class ItemSelect(Item):
 
         all = self.values + self.get_options() + self.__class__.values
         options = [f(k).format(key=k, value=v) for k,v in all]
-        head = '<select {0}>'.format(self.attribute_string(), **self._values())
+        head = '<select class="form-control" {0}>'.format(self.attribute_string(), **self._values())
         content = '\n'.join(options)
         tail = '</select>'
 
-        return head + content + tail
+        return self._wrap_group(head + content + tail)
 
 class ItemDummy(Item):
     default = None
@@ -248,7 +266,7 @@ class ItemPassword(Item):
     default = ''
 
     def __str__(self):
-        return '<input type="password" {0} value="&#13;"/>'.format(self.attribute_string(), **self._values())
+        return self._wrap_group('<input class="form-control" type="password" {0} value="&#13;"/>'.format(self.attribute_string(), **self._values()))
 
 _aspects = [
     (4, 3),   # Regular 4:3 (VGA, PAL, SVGA, etc)
@@ -307,11 +325,11 @@ class ItemStatic(Item):
     default = None
 
     def __init__(self, *args, **kwargs):
-        kwargs['class'] = (kwargs.get('class', '') + ' static').strip()
+        kwargs['class'] = (kwargs.get('class', '') + ' form-control-static').strip()
         Item.__init__(self, *args, **kwargs)
 
     def __str__(self):
-        return '<div {0}>&nbsp;</div>'.format(self.attribute_string(), **self._values())
+        return self._wrap_group('<p {0}>&nbsp;</p>'.format(self.attribute_string(), **self._values()))
 
 class ItemFilelist(Item):
     """Select file from available choices.
@@ -341,11 +359,11 @@ class ItemFilelist(Item):
                 return '<option>{value}</option>'
 
         options = [f(x).format(value=x) for x in files]
-        head = '<select {0}>'.format(self.attribute_string(), **self._values())
+        head = '<select class="form-control" {0}>'.format(self.attribute_string(), **self._values())
         content = '\n'.join(options)
         tail = '</select>'
 
-        return head + content + tail
+        return self._wrap_group(head + content + tail)
 
 class ItemTextArea(Item):
     default = ''
@@ -354,7 +372,7 @@ class ItemTextArea(Item):
         Item.__init__(self, *args, **kwargs)
 
     def __str__(self):
-        return '<textarea {0}>{value}</textarea>'.format(self.attribute_string(), **self._values())
+        return self._wrap_group('<textarea class="form-control" {0}>{value}</textarea>'.format(self.attribute_string(), **self._values()))
 
 class ItemCheckbox(Item):
     default = False
@@ -371,7 +389,7 @@ class ItemCheckbox(Item):
         Item.set(self, value, rollback)
 
     def __str__(self):
-        return '<input type="checkbox" {0} />'.format(self.attribute_string(), **self._values())
+        return '<div class="checkbox"><label><input type="checkbox" {0} /> {title}</label></div>'.format(self.attribute_string(), title=self.title, **self._values())
 
 class ItemTransition(ItemSelect):
     default = 'vfade'
@@ -424,8 +442,11 @@ class Settings(object):
         return self.groups.values().__iter__()
 
     def item(self, key):
-        [groupname, itemname] = key.split('.')
-        return self.groups[groupname][itemname]
+        if key == 'Env':
+            return self.enviroment
+        cur = self.groups
+        for part in key.split('.'): cur = cur[part]
+        return cur
 
     def __str__(self):
         pp = pprint.PrettyPrinter(indent=4)

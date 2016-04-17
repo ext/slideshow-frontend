@@ -39,6 +39,13 @@ class Slide(object):
             image_path = settings['Path.Image']
             raise ValueError, "could not locate '{path}' in '{root}'".format(path=path, root=os.path.join(base_path, image_path))
 
+    def as_json(self):
+        return {
+            'id': self.id,
+            'timestamp': self.timestamp,
+            'active': self.active,
+        }
+
     def __getattribute__(self, key):
         if key == 'attributes':
             cls = list(self.classes)

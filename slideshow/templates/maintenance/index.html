@@ -17,9 +17,7 @@
 </head>
 
 <body>
-	<div id="breadcrumb">
-		<h2><a href="/">Slideshow</a> &gt; Maintenance</h2>
-	</div>
+	<h2>Maintenance</h2>
 
 	<py:if test="state == daemon.CRASHED">
 		<p>The slideshow daemon crashed. Please follow these steps: </p>
@@ -38,7 +36,7 @@
 		</ol>
 	</py:if>
 
-	<h2>Menu</h2>
+	<h3>Menu</h3>
 	<ul>
 		<li py:if="state == daemon.STOPPED"><a href="/maintenance/start">Start daemon</a> (<a href="/maintenance/start?resolution=800x600&amp;fullscreen=0">windowed</a>)</li>
 		<li py:if="state == daemon.RUNNING"><a href="/maintenance/stop">Stop daemon</a></li>
@@ -47,13 +45,13 @@
 		<li><a href="/maintenance/config">Configuration</a></li>
 	</ul>
 
-	<h2>Log</h2>
+	<h3>Log</h3>
 	<div id="log" class="mono">
 		<pre><span py:for="severity, line in log" class="${logcls[severity]}">${Markup(line)}
 </span></pre>
 	</div>
 
-	<h2>Debug</h2>
+	<h3>Debug</h3>
 	<div id="debug" class="mono">
 		<p>
 			CWD: ${cwd}<br/>

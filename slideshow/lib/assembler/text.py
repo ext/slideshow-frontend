@@ -100,8 +100,10 @@ class TextArea(Item):
         self._alignment = Item._get(element, 'align', 'left')
 
     def render(self, content):
-        return ('<label for="slide-{name}">{title}</label><br/>' +
-                '<textarea id="slide-{name}" name="{name}" rows="15" style="text-align: {alignment};">{content}</textarea><br/>') \
+        return ('<div class="form-group">' +
+                '  <label class="control-label" for="slide-{name}">{title}</label>' +
+                '  <textarea id="slide-{name}" name="{name}" rows="15" style="text-align: {alignment};" class="form-control">{content}</textarea>' +
+                '</div>') \
                 .format(name=self.name, title=self.title, alignment=self._alignment, content=content)
 
     def raster(self, cr, size, realsize, scale, content):
@@ -142,8 +144,10 @@ class Label(Item):
         self._alignment = Item._get(element, 'align', 'left')
 
     def render(self, content):
-        return ('<label for="slide-{name}">{title}</label><br/>' +
-                '<input type="text" id="slide-{name}" name="{name}" size="28" value="{content}" /><br/>') \
+        return ('<div class="form-group">' +
+                '  <label class="control-label" for="slide-{name}">{title}</label>' +
+                '  <input type="text" id="slide-{name}" name="{name}" class="form-control" value="{content}" />' +
+                '</div>') \
                 .format(name=self.name, title=self.title, content=content)
 
     def raster(self, cr, size, realsize, scale, content):

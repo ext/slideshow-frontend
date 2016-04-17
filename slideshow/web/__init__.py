@@ -19,6 +19,7 @@ from slideshow.pages import instance
 from slideshow.pages import slides
 from slideshow.pages import maintenance
 from slideshow.pages import queue
+from slideshow.pages.api import HandlerV1 as ApiHandlerV1
 from slideshow.settings import Settings, ValidationError
 from slideshow.daemon import Daemon
 from slideshow.video_preview import PreviewCreator
@@ -271,6 +272,12 @@ def run():
         # make all worker threads connect to the database
         cherrypy.engine.subscribe('start_thread', browser.connect)
 
+        # json output
+        def json_content():
+            headers = cherrypy.response.headers
+            headers['Content-Type'] = 'application/json;charset=utf8'
+        cherrypy.tools.jsonheaders = cherrypy.Tool('before_finalize', json_content, priority=60)
+
         # load application config
         root = Root()
         application = cherrypy.tree.mount(root, '/')
@@ -286,6 +293,16 @@ def run():
                 'tools.staticdir.dir': '../static',
                 },
             })
+        api_app = cherrypy.tree.mount(ApiHandlerV1(), '/api/v1')
+        api_app.config.update({
+            '/': {
+                'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
+                'tools.jsonheaders.on': True,
+                'tools.gzip.on': True,
+                'tools.encode.on': True,
+                'tools.encode.encoding': 'utf8',
+            },
+        })
 
         # add password-protection if available
         passwd = os.path.join(settings['Path.BasePath'], 'users')

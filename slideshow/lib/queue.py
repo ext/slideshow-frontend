@@ -36,6 +36,14 @@ class Queue:
                 `sortorder`
         """, {'queue': id}).fetchall()]
 
+    def as_json(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'loop': self.loop,
+            'slides': [x.as_json() for x in self.slides]
+        }
+
     def __len__(self):
         return len(self.slides)
 
