@@ -2,7 +2,7 @@
 /* global queues:false, active:false, notice_visible:true */
 /* global queue:true, slide:true, config:true */
 
-var queue = function(){
+var queue = (function(){
 	'use strict';
 
 	function all_queues_except(id){
@@ -62,9 +62,9 @@ var queue = function(){
 			}
 		},
 	};
-}();
+})();
 
-var slide = function(){
+var slide = (function(){
 	'use strict';
 
 	var post = function(url, data, func){
@@ -139,9 +139,9 @@ var slide = function(){
 			});
 		},
 	};
-}();
+})();
 
-var config = function(){
+var config = (function(){
 	'use strict';
 
 	function preview_transition(){
@@ -152,7 +152,7 @@ var config = function(){
 	return {
 		preview_transition: preview_transition,
 	};
-}();
+})();
 
 $(document).ready(function(){
 	'use strict';
