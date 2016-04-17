@@ -14,6 +14,17 @@
 
 	<p class="description">Using this option you can upload an existing image. The image will be scaled to fit the screen but will keep the aspect ratio.</p>
 
-	<input type="file" id="${assembler.name}-filename" name="filename" accept="image/*" />
-	<input type="submit" value="Upload" onclick="javascript:return ${assembler.name}_validate_submit();"/>
+	<div class="row">
+		<div class="col-sm-4">
+			<div class="form-group">
+				<label for="${assembler.name}-filename" class="control-label">Filename</label>
+				<input class="form-control" type="file" id="${assembler.name}-filename" name="filename" accept="image/*" />
+			</div>
+
+			<div class="actions">
+				<input class="btn btn-primary pull-right" type="submit" value="Upload" onclick="javascript:return ${assembler.name}_validate_submit();"/>
+			</div>
+		</div>
+	</div>
+
 </assembler>

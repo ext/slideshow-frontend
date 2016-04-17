@@ -2,12 +2,24 @@
 	<input type="hidden" name="cache" value="1" />
 	<p class="description">Render and rasterize webpage.</p>
 
-	<input type="url" id="${assembler.name}-url" name="url" />
+	<div class="row">
+		<div class="col-sm-4">
+			<div class="form-group">
+				<label class="control-label">URL</label>
+				<input class="form-control" type="url" id="${assembler.name}-url" name="url" />
+			</div>
 
-	<label>
-		<input type="checkbox" name="cache" value="0" />
-		Disable caching.
-	</label>
+			<div class="checkbox">
+				<label>
+					<input type="checkbox" name="cache" value="0" />
+					Disable caching.
+				</label>
+			</div>
 
-	<input type="submit" value="Upload"/>
+			<div class="actions">
+				<input class="btn btn-primary pull-right" type="submit" value="Fetch" />
+			</div>
+		</div>
+	</div>
+
 </assembler>
