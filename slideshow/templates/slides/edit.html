@@ -21,7 +21,7 @@
 		<input type="hidden" name="id" value="${id}" />
 		<xi:include href="../../lib/assembler/text.html" />
 		<div py:match="assembler" id="${select('fieldset/@id')}">
-			${select('fieldset/*[not(legend or @class=\'description\')]')}
+			${select('*[not(@class=\'description\')]')}
 		</div>
 	</form>
 
