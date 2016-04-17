@@ -22,7 +22,7 @@
 	}
 
 	function init(){
-		fields = $('.assembler.have-preview .trigger-preview').find('input, textarea');
+		fields = $('.fields.have-preview .trigger-preview').find('input, textarea');
 		fields
 			.blur(update)
 			.keydown(function(){

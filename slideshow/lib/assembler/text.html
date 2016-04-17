@@ -1,28 +1,23 @@
 <assembler xmlns:py="http://genshi.edgewall.org/">
-	<fieldset id="assembler_text" class="assembler foldable have-preview">
-		<legend>Text <a href="#" onclick="return $('#assembler_text').foldable('toggle');" class="folding"></a></legend>
-		<input type="hidden" name="assembler" value="${assembler.name}" />
-		<input type="hidden" name="context" value="${context}" />
-		<p class="description">Using this option you can create new slides with text only. The text will be applied to the predefined background if specified in the configuration.</p>
+	<p class="description">Using this option you can create new slides with text only. The text will be applied to the predefined background if specified in the configuration.</p>
 
-		<div class="row">
-			<div class="col-sm-4 fields">
-				<span class="trigger-preview" py:for="item in template.items()">
-					${Markup(item.render(content.get(item.name, '')))}
-				</span>
-				<p class="help">
-					Text is parsed using <a href="http://developer.gnome.org/pango/stable/PangoMarkupFormat.html">Pango Markup</a>.
-					Allowed html-tags is <tt>&lt;b&gt;</tt>, <tt>&lt;big&gt;</tt>, <tt>&lt;i&gt;</tt>, <tt>&lt;s&gt;</tt>, <tt>&lt;sub&gt;</tt>, <tt>&lt;sup&gt;</tt>, <tt>&lt;small&gt;</tt>, <tt>&lt;span&gt;</tt>, <tt>&lt;tt&gt;</tt> and <tt>&lt;u&gt;</tt>.<br/>
-					Variables placed in curly brackets {} can be sub&shy;stituted by POSTing to <a href="/slides/update/${id and id or ''}">/slides/update/${id and id or ':id'}</a>.
-				</p>
-				<div class="actions">
-					<button type="submit" name="submit" class="btn btn-primary pull-right">Upload</button>
-				</div>
-			</div>
-
-			<div class="col-sm-8 preview">
-				<img class="preview-target" src="/slides/preview?${preview}" />
+	<div class="row">
+		<div class="col-sm-4 fields have-preview">
+			<span class="trigger-preview" py:for="item in template.items()">
+				${Markup(item.render(content.get(item.name, '')))}
+			</span>
+			<p class="help">
+				Text is parsed using <a href="http://developer.gnome.org/pango/stable/PangoMarkupFormat.html">Pango Markup</a>.
+				Allowed html-tags is <tt>&lt;b&gt;</tt>, <tt>&lt;big&gt;</tt>, <tt>&lt;i&gt;</tt>, <tt>&lt;s&gt;</tt>, <tt>&lt;sub&gt;</tt>, <tt>&lt;sup&gt;</tt>, <tt>&lt;small&gt;</tt>, <tt>&lt;span&gt;</tt>, <tt>&lt;tt&gt;</tt> and <tt>&lt;u&gt;</tt>.<br/>
+				Variables placed in curly brackets {} can be sub&shy;stituted by POSTing to <a href="/slides/update/${id and id or ''}">/slides/update/${id and id or ':id'}</a>.
+			</p>
+			<div class="actions">
+				<button type="submit" name="submit" class="btn btn-primary pull-right">Upload</button>
 			</div>
 		</div>
-	</fieldset>
+
+		<div class="col-sm-8 preview">
+			<img class="preview-target" src="/slides/preview?${preview}" />
+		</div>
+	</div>
 </assembler>
