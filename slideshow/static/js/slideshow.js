@@ -21,12 +21,12 @@ var queue = function(){
 				var id = queues[i];
 				var other = queues.filter(function(x){ return x != id; });
 				$(id).bind('updated', function() {
-					var self = '#' + $(this).attr('id');
+					var current_id = '#' + $(this).attr('id');
 					var list = $(this).sortable('toArray');
 					var n = list.length;
 
 					/* show/hide warning about empty queue */
-					if ( self == active ){
+					if ( current_id == active ){
 						if ( notice_visible && n > 0 ){
 							notice_visible = false;
 							$("#empty_notice").fadeOut("slow");
