@@ -19,19 +19,19 @@ var queue = function(){
 			/* queues is a global variable */
 			for ( var i in queues ){
 				var id = queues[i];
-				var other = queues.filter(function(x){ return x != id; });
+				var other = queues.filter(function(x){ return x !== id; });
 				$(id).bind('updated', function() {
 					var current_id = '#' + $(this).attr('id');
 					var list = $(this).sortable('toArray');
 					var n = list.length;
 
 					/* show/hide warning about empty queue */
-					if ( current_id == active ){
+					if ( current_id === active ){
 						if ( notice_visible && n > 0 ){
 							notice_visible = false;
 							$("#empty_notice").fadeOut("slow");
 						}
-						if ( !notice_visible && n == 0 ){
+						if ( !notice_visible && n === 0 ){
 							notice_visible = true;
 							$("#empty_notice").fadeIn("slow");
 						}
@@ -170,7 +170,7 @@ $(document).ready(function(){
 	$f.foldable({
 		collapsed: function(){
 			/* all start collapsed but text assembler */
-			return $(this).attr('id') != 'assembler_text';
+			return $(this).attr('id') !== 'assembler_text';
 		},
 		expanded_html: '',
 		collapsed_html: '',
@@ -197,7 +197,7 @@ function update_browserstring(){
 	}
 
 	/* append a / to hostname if specified */
-	if ( hostname != "" ){
+	if ( hostname !== "" ){
 		hostname += "/";
 	}
 
