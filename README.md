@@ -18,16 +18,20 @@ Slideshow is a kiosk-style application for showing text, image and video in a co
 * python
 * cherrypy
 * genshi
+* nodejs
 
 ## Debian/ubuntu requirements
 
-    sudo apt-get install python-cherrypy3 python-genshi python-xlib python-pythonmagick python-gamin python-setuptools python-pip
+    sudo apt-get install python-cherrypy3 python-genshi python-xlib python-pythonmagick python-gamin python-setuptools python-pip nodejs npm
     sudo pip install htmlcolor
 
 # Usage
 
     (hack to run inplace)
     export PYTHONPATH=.
+    npm install
+    sudo npm install -g grunt-cli
+    grunt build
     python slideshow/web --install /path/to/storage
     python slideshow/web -f /path/to/storage/settings.conf
 

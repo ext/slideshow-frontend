@@ -1,11 +1,14 @@
-String.prototype.repeat = function(num){
-	return new Array( num + 1 ).join( this );
-}
+/* exported update_browserstring, config_open, text_preview_init */
+/* global queues:false, active:false, notice_visible:true */
+/* global queue:true, slide:true, config:true */
 
-/* global states */
-var delete_id = undefined; /* which slide is about to be deleted */
+var queue = (function(){
+	'use strict';
 
-queue = function(){
+	function all_queues_except(id){
+		return queues.filter(function(x){ return x !== id; });
+	}
+
 	return {
 		sorting: function(){
 			/* test if queues exists on this page */
@@ -13,37 +16,39 @@ queue = function(){
 				return;
 			}
 
-			/* queues is a global variable */
-			for ( i in queues ){
-				var id = queues[i];
-				var other = queues.filter(function(x){ return x != id; });
-				$(id).bind('updated', function() {
-					var self = '#' + $(this).attr('id');
-					var list = $(this).sortable('toArray');
-					var n = list.length;
+			function updated(){
+				var current_id = '#' + $(this).attr('id');
+				var list = $(this).sortable('toArray');
+				var n = list.length;
 
-					/* show/hide warning about empty queue */
-					if ( self == active ){
-						if ( notice_visible && n > 0 ){
-							notice_visible = false;
-							$("#empty_notice").fadeOut("slow");
-						}
-						if ( !notice_visible && n == 0 ){
-							notice_visible = true;
-							$("#empty_notice").fadeIn("slow");
-						}
+				/* show/hide warning about empty queue */
+				if ( current_id === active ){
+					if ( notice_visible && n > 0 ){
+						notice_visible = false;
+						$("#empty_notice").fadeOut("slow");
 					}
+					if ( !notice_visible && n === 0 ){
+						notice_visible = true;
+						$("#empty_notice").fadeIn("slow");
+					}
+				}
 
-					/* notify server about update */
-					$.ajax({
-						type: "POST",
-						url: "/slides/ajax/move",
-						data: "queue=" + $(this).attr('id') + "&slides=" + list,
-						error: function(x, status, error){
-							alert(status + '\n' + error);
-						},
-					});
+				/* notify server about update */
+				$.ajax({
+					type: "POST",
+					url: "/slides/ajax/move",
+					data: "queue=" + $(this).attr('id') + "&slides=" + list,
+					error: function(x, status, error){
+						alert(status + '\n' + error);
+					},
 				});
+			}
+
+			/* queues is a global variable */
+			for ( var i in queues ){
+				var id = queues[i];
+				var other = all_queues_except(id);
+				$(id).bind('updated', updated);
 				$(id).sortable({
 					connectWith: other,
 					placeholder: 'slide_placeholder',
@@ -57,9 +62,11 @@ queue = function(){
 			}
 		},
 	};
-}();
+})();
 
-var slide = function(){
+var slide = (function(){
+	'use strict';
+
 	var post = function(url, data, func){
 		$.ajax({
 			type: "POST",
@@ -67,11 +74,11 @@ var slide = function(){
 			data: data,
 			dataType: 'json',
 			success: function(data){
-				if ( !data.success ){
+				if ( data.success ){
+					func(data);
+				} else {
 					alert(data.message);
-					return;
 				}
-				return func(data);
 			},
 			error: function(x, status, error){
 				alert(status + '\n' + error);
@@ -83,10 +90,8 @@ var slide = function(){
 		/* show a confirmation dialog and delete if user confirms (exception
 		 * being if quick is true in which case it is deleted immediately) */
 		delete: function(id, quick){
-			delete_id = id;
-
 			if ( quick ){
-				slide.real_delete();
+				slide.real_delete(id);
 				return;
 			}
 
@@ -97,24 +102,21 @@ var slide = function(){
 				position: 'center',
 				width: 834, /* 800 + 17 + 17 (padding) */
 				height: 700,
-				close: function(){
-					delete_id = undefined;
-				}
 			});
 		},
 
 		/* delete slide without confirmation */
-		real_delete: function(){
+		real_delete: function(id){
 			$.ajax({
 				type: "POST",
 				url: "/slides/ajax/delete",
-				data: {id: delete_id},
+				data: {id: id},
 				dataType: 'json',
 				success: function(data){
-					if ( data['success'] ){
-						$('#slide_' + delete_id).remove();
+					if ( data.success ){
+						$('#slide_' + id).remove();
 					} else {
-						alert(data['message']);
+						alert(data.message);
 					}
 					$('#delete_dialog').dialog('close');
 				},
@@ -125,25 +127,23 @@ var slide = function(){
 			});
 		},
 
-		activate: function(id, elem){
+		activate: function(id){
 			return post("/slides/ajax/activate", {id: id}, function(data){
-				parent = '#slide_' + id;
-				$(parent).attr('class', data.class);
-				console.log('actiaved');
+				$('#slide_' + id).attr('class', data.class);
 			});
 		},
 
-		deactivate: function(id, elem){
+		deactivate: function(id){
 			return post("/slides/ajax/deactivate", {id: id}, function(data){
-				parent = '#slide_' + id;
-				$(parent).attr('class', data.class);
-				console.log('deactiaved');
+				$('#slide_' + id).attr('class', data.class);
 			});
 		},
-	}
-}();
+	};
+})();
 
-var config = function(){
+var config = (function(){
+	'use strict';
+
 	function preview_transition(){
 		var selected = $('.conf .transition :selected').val();
 		$('#transition_preview').html('<img src="/transition/' + selected + '.gif" />');
@@ -152,9 +152,11 @@ var config = function(){
 	return {
 		preview_transition: preview_transition,
 	};
-}();
+})();
 
 $(document).ready(function(){
+	'use strict';
+
 	/* enable sorting on main page */
 	queue.sorting();
 
@@ -169,7 +171,7 @@ $(document).ready(function(){
 	$f.foldable({
 		collapsed: function(){
 			/* all start collapsed but text assembler */
-			return $(this).attr('id') != 'assembler_text';
+			return $(this).attr('id') !== 'assembler_text';
 		},
 		expanded_html: '',
 		collapsed_html: '',
@@ -184,19 +186,21 @@ $(document).ready(function(){
 });
 
 function update_browserstring(){
+	'use strict';
+
 	var provider = $("input[name='Database.Provider']").val();
 	var username = $("input[name='Database.Username']").val();
 	var hostname = $("input[name='Database.Hostname']").val();
 	var name     = $("input[name='Database.Name']").val();
 
 	/* build credential-part of the browserstring */
-	credential = '';
+	var credential = '';
 	if ( username !== '' ){
 		credential = username + '@';
 	}
 
 	/* append a / to hostname if specified */
-	if ( hostname != "" ){
+	if ( hostname !== "" ){
 		hostname += "/";
 	}
 
@@ -204,39 +208,51 @@ function update_browserstring(){
 }
 
 function config_open(section){
-	console.log('open section ' + section);
+	'use strict';
 
 	/* reset current selection */
-	$('#sidebar a').attr('class','');
+	$('#sidebar a').attr('class', '');
 	$('.conf fieldset').hide();
 
 	$('#menu_'+section+' a').attr('class', 'selected');
 	$('#conf_'+section).show();
 }
 
-var $text_preview_fields = [];
-var text_preview_timer;
-function text_preview(){
-	clearTimeout(text_preview_timer);
+/* text preview (see text assembler) */
+(function($){
+	'use strict';
 
-	data = {}
-	$text_preview_fields.each(function(){
-		data[$(this).attr('name')] = $(this).val();
-	});
+	var delay = 800; /* ms */
+	var fields = [];
+	var timer;
 
-	$('#assembler_text .preview img').attr('src', '/slides/preview?' + $.param(data));
-}
+	return $(init);
 
-function text_preview_init(){
-	$text_preview_fields = $('#assembler_text .fields span').find('input, textarea');
-	$text_preview_fields.each(function(){
-		$(this).blur(text_preview);
-		$(this).keydown(function(){
-			clearTimeout(text_preview_timer);
-			text_preview_timer = setTimeout(text_preview, 800);
+	function getParams(){
+		var data = {};
+		fields.each(function(){
+			data[$(this).attr('name')] = $(this).val();
 		});
-	});
+		return $.param(data);
+	}
 
-	/* initial preview */
-	text_preview();
-}
+	function update(){
+		var url = '/slides/preview?' + getParams();
+		$('img.preview-target').attr('src', url);
+	}
+
+	function init(){
+		fields = $('.assembler.have-preview .trigger-preview').find('input, textarea');
+		fields
+			.blur(update)
+			.keydown(function(){
+				clearTimeout(timer);
+				timer = setTimeout(update, delay);
+			})
+		;
+
+		/* initial preview */
+		update();
+	}
+
+})(jQuery);
