@@ -1,6 +1,6 @@
 String.prototype.repeat = function(num){
 	return new Array( num + 1 ).join( this );
-}
+};
 
 /* global states */
 var delete_id = undefined; /* which slide is about to be deleted */
@@ -140,7 +140,7 @@ var slide = function(){
 				console.log('deactiaved');
 			});
 		},
-	}
+	};
 }();
 
 var config = function(){
@@ -219,7 +219,7 @@ var text_preview_timer;
 function text_preview(){
 	clearTimeout(text_preview_timer);
 
-	data = {}
+	data = {};
 	$text_preview_fields.each(function(){
 		data[$(this).attr('name')] = $(this).val();
 	});
