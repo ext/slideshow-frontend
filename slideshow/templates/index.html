@@ -27,18 +27,10 @@
 				self.items = items
 
 			def attrs_li(self, i):
-				c = []
-				if i == 0:
-					c.append('first')
-				if i == len(self.items) - 1:
-					c.append('last')
+				c = [self.items[i][0]]
 				if self.items[i][0] == parent:
-					c.append('selection')
-
+					c.append('active')
 				return {'class': ' '.join(c)}
-
-			def attrs_a(self, i):
-				return {'class': 'menu_' + self.items[i][0]}
 
 		menu = Menu(
 			('main', _('main'), '/'),
@@ -54,18 +46,17 @@
 		</div>
 
 		<div id="bar">
-			<span class="daemonstatus">Status: ${daemonstr}</span>
+			<span class="daemonstatus">Status: <strong>${daemonstr}</strong></span>
 
-			<div id="menu">
-				<h2>Menu</h2>
-				<ul>
+			<nav id="menu">
+				<ul class="nav nav-tabs">
 					<py:for each="(i, (_, title, url)) in enumerate(menu.items)">
-					<li py:attrs="menu.attrs_li(i)">
-						<a href="${url}" py:attrs="menu.attrs_a(i)">${title}</a>
+					<li py:attrs="menu.attrs_li(i)" role="presentation">
+						<a href="${url}"><i></i> ${title}</a>
 					</li>
 					</py:for>
 				</ul>
-			</div>
+			</nav>
 		</div>
 
 		<div id="content">

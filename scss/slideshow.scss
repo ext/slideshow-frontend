@@ -35,78 +35,49 @@ body {
 	color: #aaa;
 }
 
+.nav-tabs > li > a {
+	background: #f7f7f7;
+	border-bottom-color: $nav-tabs-border-color;
+}
+
+#bar {
+	font-size: 12px;
+}
+
 #menu {
-	font: normal 10px verdana,'Bitstream Vera Sans',helvetica,arial,sans-serif;
+	li {
+		i {
+			@extend .fa;
+		}
 
-	padding: .25em 0;
-	border-bottom: 1px solid black;
-}
+		&.main i {
+			@extend .fa-desktop;
+		}
 
-#menu :link, #menu :visited {
-	padding: .25em 14px .25em 30px;
-	text-decoration: none;
-	background: white;
-	border: 1px solid black;
-}
+		&.slides i {
+			@extend .fa-picture-o;
+		}
 
-#menu .menu_main {
-	background: white url('/static/icon/images.png') no-repeat 10% 50%;
-}
+		&.queues i {
+			@extend .fa-folder-open;
+		}
 
-#menu .menu_slides {
-	background: white url('/static/icon/picture_add.png') no-repeat 10% 50%;
-}
-
-#menu .menu_video {
-	background: white url('/static/icon/film.png') no-repeat 10% 50%;
-}
-
-#menu .menu_queues {
-	background: white url('/static/icon/folder.png') no-repeat 10% 50%;
-}
-
-#menu .menu_maintenance {
-	background: white url('/static/icon/wrench.png') no-repeat 10% 50%;
-}
-
-#menu li :hover, #menu li :active {
-	color: #00f;
-}
-
-#menu .selection :link, #menu .selection :visited {
-	border-bottom: 1px solid white;
-}
-
-#menu a {
-	color: #000;
-}
-
-#menu .first {
-	padding-left: 10px;
-}
-
-
-#menu ul {
-	list-style: none;
-	text-align: left;
-}
-
-#menu li {
-	display: inline;
-	white-space: nowrap;
-}
-
-#menu h2 {
-	display: none;
+		&.maintenance i {
+			@extend .fa-wrench;
+		}
+	}
 }
 
 .daemonstatus {
-	font: normal 10px verdana,'Bitstream Vera Sans',helvetica,arial,sans-serif;
 	float: right;
-	padding: .25em 20px .10em 20px;
+	display: block;
+	border-radius: 4px 4px 0 0;
+	line-height: 1.42857;
+	border: 1px solid $nav-tabs-border-color;
+	border-bottom: 0;
+	padding: 10px 15px;
 	white-space: nowrap;
 	background: white;
-	border: 1px solid black;
 }
 
 #content {
