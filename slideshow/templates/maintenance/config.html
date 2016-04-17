@@ -4,27 +4,9 @@
 	lang="en">
 	<xi:include href="../index.html" />
 
-<head>
-	<script type="text/javascript">
-		//<![CDATA[
-		$(function() {
-			$('#sidebar a').disableSelection();
-		  update_browserstring();
-
-		  section = 'Path';
-		  if ( window.location.hash.length > 0 ){
-		    section = window.location.hash.substr(1);
-		  }
-
-		  config_open(section);
-
-		  $(".browserblur").change(function(){
-		    update_browserstring();
-		  });
-		});
-		//]]>
-	</script>
-</head>
+	<head>
+		<title>Configuration</title>
+	</head>
 
 <body id="configurator">
 	<h2>Configuration</h2>
@@ -32,8 +14,8 @@
 	<form id="form" method="post" action="/maintenance/config/save">
 		<div id="sidebar">
 			<ul>
-				<li py:for="group in settings" py:if="not group.hidden" id="menu_${group.name}"><a href="#${group.name}" onclick="config_open('${group.name}');">${group.name}</a></li>
-				<li id="menu_Environmental"><a href="#Environmental" onclick="config_open('Environmental'); return false;">Environment</a></li>
+				<li py:for="group in settings" py:if="not group.hidden" id="menu_${group.name}"><a href="#${group.name}" onclick="configurator.open_section('${group.name}');">${group.name}</a></li>
+				<li id="menu_Environmental"><a href="#Environmental" onclick="configurator.open_section('Environmental'); return false;">Environment</a></li>
 				<li><hr/></li>
 				<li><a href="/maintenance">Cancel</a></li>
 				<li><a href="#" onclick="document.forms[0].submit();">Save</a></li>
@@ -74,6 +56,11 @@
 
 	<br style="clear:both;"/>
 
+	<script type="text/javascript">
+		//<![CDATA[
+			$(function() { configurator.init(); })
+		//]]>
+	</script>
 </body>
 
 </html>

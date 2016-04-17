@@ -1,6 +1,5 @@
-/* exported update_browserstring, config_open, text_preview_init */
 /* global queues:false, active:false, notice_visible:true */
-/* global queue:true, slide:true, config:true */
+/* global queue:true, slide:true */
 
 var queue = (function(){
 	'use strict';
@@ -142,19 +141,6 @@ var slide = (function(){
 	};
 })();
 
-var config = (function(){
-	'use strict';
-
-	function preview_transition(){
-		var selected = $('.conf .transition :selected').val();
-		$('#transition_preview').html('<img src="/transition/' + selected + '.gif" />');
-	}
-
-	return {
-		preview_transition: preview_transition,
-	};
-})();
-
 $(document).ready(function(){
 	'use strict';
 
@@ -198,43 +184,4 @@ $(document).ready(function(){
 		collapsed_html: '',
 		connected: $f,
 	});
-
-	/* preview transition during configuration */
-	config.preview_transition();
-	$('.conf .transition').change(function(){
-		config.preview_transition();
-	});
 });
-
-function update_browserstring(){
-	'use strict';
-
-	var provider = $("input[name='Database.Provider']").val();
-	var username = $("input[name='Database.Username']").val();
-	var hostname = $("input[name='Database.Hostname']").val();
-	var name     = $("input[name='Database.Name']").val();
-
-	/* build credential-part of the browserstring */
-	var credential = '';
-	if ( username !== '' ){
-		credential = username + '@';
-	}
-
-	/* append a / to hostname if specified */
-	if ( hostname !== "" ){
-		hostname += "/";
-	}
-
-	$('.browserstring').html(provider + "://" + credential + hostname + name);
-}
-
-function config_open(section){
-	'use strict';
-
-	/* reset current selection */
-	$('#sidebar a').attr('class', '');
-	$('.conf fieldset').hide();
-
-	$('#menu_'+section+' a').attr('class', 'selected');
-	$('#conf_'+section).show();
-}
