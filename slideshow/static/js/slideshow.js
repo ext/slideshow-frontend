@@ -2,10 +2,6 @@
 /* global queues:false, active:false, notice_visible:true */
 /* global queue:true, slide:true, config:true */
 
-String.prototype.repeat = function(num){
-	return new Array( num + 1 ).join( this );
-};
-
 var queue = function(){
 	function all_queues_except(id){
 		return queues.filter(function(x){ return x !== id; });
