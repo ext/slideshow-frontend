@@ -1,8 +1,10 @@
+/* exported update_browserstring, config_open, text_preview_init */
+
 String.prototype.repeat = function(num){
 	return new Array( num + 1 ).join( this );
 };
 
-/* global states */
+/* globals */
 var delete_id = undefined; /* which slide is about to be deleted */
 
 queue = function(){
@@ -125,7 +127,7 @@ var slide = function(){
 			});
 		},
 
-		activate: function(id, elem){
+		activate: function(id){
 			return post("/slides/ajax/activate", {id: id}, function(data){
 				parent = '#slide_' + id;
 				$(parent).attr('class', data.class);
@@ -133,7 +135,7 @@ var slide = function(){
 			});
 		},
 
-		deactivate: function(id, elem){
+		deactivate: function(id){
 			return post("/slides/ajax/deactivate", {id: id}, function(data){
 				parent = '#slide_' + id;
 				$(parent).attr('class', data.class);
