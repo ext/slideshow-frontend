@@ -1,4 +1,5 @@
 /* exported update_browserstring, config_open, text_preview_init */
+/* global queues, active, notice_visible */
 
 String.prototype.repeat = function(num){
 	return new Array( num + 1 ).join( this );
@@ -7,7 +8,7 @@ String.prototype.repeat = function(num){
 /* globals */
 var delete_id = undefined; /* which slide is about to be deleted */
 
-queue = function(){
+var queue = function(){
 	return {
 		sorting: function(){
 			/* test if queues exists on this page */
@@ -16,7 +17,7 @@ queue = function(){
 			}
 
 			/* queues is a global variable */
-			for ( i in queues ){
+			for ( var i in queues ){
 				var id = queues[i];
 				var other = queues.filter(function(x){ return x != id; });
 				$(id).bind('updated', function() {
@@ -192,7 +193,7 @@ function update_browserstring(){
 	var name     = $("input[name='Database.Name']").val();
 
 	/* build credential-part of the browserstring */
-	credential = '';
+	var credential = '';
 	if ( username !== '' ){
 		credential = username + '@';
 	}
@@ -221,7 +222,7 @@ var text_preview_timer;
 function text_preview(){
 	clearTimeout(text_preview_timer);
 
-	data = {};
+	var data = {};
 	$text_preview_fields.each(function(){
 		data[$(this).attr('name')] = $(this).val();
 	});
