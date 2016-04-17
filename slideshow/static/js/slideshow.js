@@ -114,10 +114,10 @@ var slide = function(){
 				data: {id: delete_id},
 				dataType: 'json',
 				success: function(data){
-					if ( data['success'] ){
+					if ( data.success ){
 						$('#slide_' + delete_id).remove();
 					} else {
-						alert(data['message']);
+						alert(data.message);
 					}
 					$('#delete_dialog').dialog('close');
 				},
