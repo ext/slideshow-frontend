@@ -1,5 +1,6 @@
 /* exported update_browserstring, config_open, text_preview_init */
-/* global queues, active, notice_visible */
+/* global queues:false, active:false, notice_visible:true */
+/* global queue:true, slide:true, config:true */
 
 String.prototype.repeat = function(num){
 	return new Array( num + 1 ).join( this );
@@ -122,15 +123,13 @@ var slide = function(){
 
 		activate: function(id){
 			return post("/slides/ajax/activate", {id: id}, function(data){
-				parent = '#slide_' + id;
-				$(parent).attr('class', data.class);
+				$('#slide_' + id).attr('class', data.class);
 			});
 		},
 
 		deactivate: function(id){
 			return post("/slides/ajax/deactivate", {id: id}, function(data){
-				parent = '#slide_' + id;
-				$(parent).attr('class', data.class);
+				$('#slide_' + id).attr('class', data.class);
 			});
 		},
 	};
