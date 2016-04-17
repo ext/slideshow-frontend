@@ -70,11 +70,11 @@ var slide = function(){
 			data: data,
 			dataType: 'json',
 			success: function(data){
-				if ( !data.success ){
+				if ( data.success ){
+					func(data);
+				} else {
 					alert(data.message);
-					return;
 				}
-				return func(data);
 			},
 			error: function(x, status, error){
 				alert(status + '\n' + error);
