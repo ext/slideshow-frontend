@@ -22,7 +22,7 @@ var queue = function(){
 			for ( var i in queues ){
 				var id = queues[i];
 				var other = all_queues_except(id);
-				$(id).bind('updated', function() {
+				$(id).bind('updated', function(){
 					var current_id = '#' + $(this).attr('id');
 					var list = $(this).sortable('toArray');
 					var n = list.length;
