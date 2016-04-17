@@ -63,13 +63,18 @@ module.exports = function(grunt){
 			},
 			build: {
 				files: {
-					'slideshow/static/js/slideshow.min.js': ['js/**/*.js'],
+					'slideshow/static/js/slideshow.min.js': [
+						'js/slideshow.js',
+						'js/slideshow.module.js',
+						'js/**/*.js',
+					],
 				},
 			},
 			libs: {
 				files: {
 					'slideshow/static/js/libs.min.js': [
 						'node_modules/jquery/dist/jquery.js',
+						'node_modules/angular/angular.js',
 						'node_modules/bootstrap-sass/assets/javascripts/bootstrap.js',
 						'node_modules/jquery-hoverintent/jquery.hoverIntent.js',
 					],

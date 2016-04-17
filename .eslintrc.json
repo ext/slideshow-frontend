@@ -7,8 +7,14 @@
     "browser": true,
     "jquery": true
   },
-  "extends": "eslint:recommended",
+  "extends": [
+    "eslint:recommended",
+    "angular"
+  ],
   "rules": {
+    "angular/log": 1,
+    "angular/definedundefined": 1,
+    "angular/timeout-service": 1,
     "array-bracket-spacing": [2, "never"],
     "brace-style": [2, "1tbs", {"allowSingleLine": true}],
     "comma-dangle": [2, "always-multiline"],
@@ -16,7 +22,7 @@
     "complexity": [1, 20],
     "computed-property-spacing": [2, "never"],
     "consistent-return": 2,
-    "consistent-this": [ 2, "self" ],
+    "consistent-this": [ 2, "vm" ],
     "curly": [2, "multi-line"],
     "dot-notation": 2,
     "eol-last": 2,
@@ -39,6 +45,7 @@
     "no-spaced-func": 2,
     "no-trailing-spaces": 2,
     "no-unneeded-ternary": 2,
+    "no-unused-vars": 1,
     "radix": 2,
     "semi": 2,
     "space-before-blocks": [2, "never"],
