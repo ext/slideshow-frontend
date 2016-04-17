@@ -102,7 +102,7 @@ var slide = function(){
 				height: 700,
 				close: function(){
 					delete_id = undefined;
-				}
+				},
 			});
 		},
 
