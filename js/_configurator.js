@@ -6,7 +6,6 @@ var configurator = (function($){
 
 	return {
 		init: init,
-		open_section: open_section,
 	};
 
 	function init(){
@@ -22,13 +21,6 @@ var configurator = (function($){
 		});
 
 		$('#sidebar a').disableSelection();
-
-		var section = 'Path';
-		if ( window.location.hash.length > 0 ){
-			section = window.location.hash.substr(1);
-		}
-
-		open_section(section);
 	}
 
 	function preview_transition(){
@@ -54,15 +46,6 @@ var configurator = (function($){
 		}
 
 		$('.browserstring').html(provider + "://" + credential + hostname + name);
-	}
-
-	function open_section(section){
-		/* reset current selection */
-		$('#sidebar a').attr('class', '');
-		$('.conf fieldset').hide();
-
-		$('#menu_'+section+' a').attr('class', 'selected');
-		$('#conf_'+section).show();
 	}
 
 })(jQuery);

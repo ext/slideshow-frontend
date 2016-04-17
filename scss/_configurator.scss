@@ -1,10 +1,4 @@
 #configurator {
-	p, h1, form, button{
-		border: 0;
-		margin: 0;
-		padding: 0;
-	}
-
 	#sidebar {
 		float: right;
 		width: 200px;
@@ -36,42 +30,15 @@
 		color: green;
 	}
 
-	.conf{
-		padding: 14px;
-		width: 750px;
-		font-family: sans-serif;
-	}
-
-	.conf br {
-		clear: left;
-	}
-
-	.conf .description {
-		float: right;
-		width: 250px;
-	}
-
-	.conf .description p {
+	.description p {
 		font-size: 0.65em;
 		padding: 1em;
 		border: 1px solid blue;
 		text-align: justify;
-	}
 
-	.conf .description p:first-child {
-		margin-top: 0 !important;
-	}
-
-	label, label span {
-		width: 200px;
-	}
-
-	label {
-		padding-top: 5px;
-		display: block;
-		font-weight: bold;
-		text-align: right;
-		float: left;
+		&:first-child {
+			margin-top: 0;
+		}
 	}
 
 	label span {

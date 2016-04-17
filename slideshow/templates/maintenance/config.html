@@ -8,59 +8,58 @@
 		<title>Configuration</title>
 	</head>
 
-<body id="configurator">
-	<h2>Configuration</h2>
+	<body id="configurator">
+		<h2>Configuration</h2>
 
-	<form id="form" method="post" action="/maintenance/config/save">
-		<div id="sidebar">
-			<ul>
-				<li py:for="group in settings" py:if="not group.hidden" id="menu_${group.name}"><a href="#${group.name}" onclick="configurator.open_section('${group.name}');">${group.name}</a></li>
-				<li id="menu_Environmental"><a href="#Environmental" onclick="configurator.open_section('Environmental'); return false;">Environment</a></li>
-				<li><hr/></li>
-				<li><a href="/maintenance">Cancel</a></li>
-				<li><a href="#" onclick="document.forms[0].submit();">Save</a></li>
-			</ul>
+		<div class="row">
+			<div class="col-md-8 col-lg-6">
+
+				<form id="form" method="post" action="/maintenance/config/save">
+					<fieldset class="row" py:for="group in settings" py:if="not group.hidden" id="conf_${group.name}" title="${group.name}">
+						<legend>${group.name}</legend>
+
+						<div class="description col-sm-6 col-sm-push-6">
+							<p py:for="desc, attr in group.description" py:attrs="attr">${Markup(desc)}</p>
+						</div>
+
+						<div class="col-sm-6 col-sm-pull-6">
+							<py:for each="item in group">
+								<label for="${group.name}.${item.name}">
+									${item.title}
+									<py:choose test="hasattr(item, 'message')">
+										<span py:when="True" class="error">${item.message}</span>
+											<span py:when="False">${item.description}</span>
+									</py:choose>
+								</label>
+								${Markup(item)}
+								<br/>
+							</py:for>
+						</div>
+					</fieldset>
+
+					<fieldset id="conf_Environmental" title="Environmental variables">
+						<legend>Environmental variables</legend>
+						<p>
+								Place each variable in the form key=value with each variable
+							on a separate line. Note that SLIDESHOW_ will be prepended
+							to each variable to prevent abuse.
+						</p>
+						<textarea name="Env" class="wide"><py:for each="k,v in settings['Env'].items()">${k}=${v}${Markup("\n")}</py:for></textarea>
+					</fieldset>
+
+					<div class="clearfix">
+						<a class="btn btn-default pull-left" href="/maintenance">Cancel</a>
+						<button class="btn btn-primary pull-right" type="submit">Save</button>
+					</div>
+				</form>
+			</div>
 		</div>
 
-		<div class="conf">
-			<fieldset py:for="group in settings" py:if="not group.hidden" id="conf_${group.name}" title="${group.name}">
-				<legend>${group.name}</legend>
-				<div class="description">
-					<p py:for="desc, attr in group.description" py:attrs="attr">${Markup(desc)}</p>
-				</div>
-
-				<py:for each="item in group">
-					<label for="${group.name}.${item.name}">
-						${item.title}
-						<py:choose test="hasattr(item, 'message')">
-							<span py:when="True" class="error">${item.message}</span>
-							<span py:when="False">${item.description}</span>
-						</py:choose>
-					</label>
-					${Markup(item)}
-					<br/>
-				</py:for>
-
-			</fieldset>
-			<fieldset id="conf_Environmental" title="Environmental variables">
-				<legend>Environmental variables</legend>
-				<p>
-					Place each variable in the form key=value with each variable
-					on a separate line. Note that SLIDESHOW_ will be prepended
-					to each variable to prevent abuse.
-				</p>
-				<textarea name="Env" class="wide"><py:for each="k,v in settings['Env'].items()">${k}=${v}${Markup("\n")}</py:for></textarea>
-			</fieldset>
-		</div>
-	</form>
-
-	<br style="clear:both;"/>
-
-	<script type="text/javascript">
-		//<![CDATA[
-			$(function() { configurator.init(); })
-		//]]>
-	</script>
-</body>
+		<script type="text/javascript">
+			//<![CDATA[
+				$(function() { configurator.init(); })
+			//]]>
+		</script>
+	</body>
 
 </html>
