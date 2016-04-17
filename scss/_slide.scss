@@ -1,0 +1,148 @@
+.queuewrapper {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	padding-top: 5px;
+	font-size: 0;
+	position: relative;
+
+	.title {
+		padding: 0 7px;
+		background: white;
+		position: absolute;
+		top: -6px;
+		left: 10px;
+		display: inline-block;
+		font-size: 12px;
+		font-family: sans-serif;
+		font-weight: normal;
+
+		a {
+			color: #00e;
+		}
+	}
+}
+
+.queue {
+	width: 100%;
+
+	/* min height when the queue is empty */
+	min-height: 50px;
+}
+
+.item {
+	padding: 8px;
+	display: inline-block;
+	vertical-align: bottom;
+
+	.placeholder {
+		border: 3px dashed #666;
+		height: 200px;
+		width: 200px;
+	}
+}
+
+.disabled {
+	.preview {
+		background: url('images/ui-bg_diagonals-thick_20_666666_40x40.png');
+	}
+
+	img {
+		opacity: 0.2;
+	}
+
+	.slide-hide {
+		display: none;
+	}
+
+	.slide-show {
+		display: inline !important;
+	}
+}
+
+.slide {
+	position: relative;
+
+	img {
+		cursor:		move;
+	}
+
+	.menu {
+		display: none;
+		position: absolute;
+		bottom: 0;
+		padding: 5px;
+		width: 100%;
+		font-size: 10px;
+		font-family: sans-serif;
+		background: rgba(255,255,255,0.9);
+
+		a {
+			text-decoration: none;
+			color: #00f;
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+
+		> span {
+			padding: 2px 0px 2px 16px;
+			background-repeat: no-repeat;
+			background-position: center left;
+		}
+	}
+
+	&.in .menu {
+		display: block;
+	}
+
+	.slide-zoom {
+		background-image: url('/static/icon/zoom.png');
+	}
+
+	.slide-play {
+		background-image: url('/static/icon/control_play_blue.png');
+	}
+
+	.slide-edit {
+		background-image: url('/static/icon/page_white_edit.png');
+	}
+
+	.slide-hide {
+		background-image: url('/static/icon/picture_empty.png');
+		/* display is controlled by .disabled */
+	}
+
+	.slide-show {
+		background-image: url('/static/icon/picture.png');
+		display: none; /* overridden by .disabled */
+	}
+
+	.slide-delete {
+		background-image: url('/static/icon/delete.png');
+	}
+}
+
+
+#delete_dialog .modal-dialog {
+	width: 1000px;
+}
+
+#delete_dialog .modal-body img {
+	width: 100%;
+}
+
+#assembler_text {
+	img {
+		max-width: 100%;
+	}
+
+	p.help {
+		font-size: 0.8em;
+	}
+}
+
+.actions {
+	@extend .clearfix;
+}

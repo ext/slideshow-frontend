@@ -1,0 +1,33 @@
+
+.navbar-default {
+	background-image: linear-gradient(to bottom, #ffc 0%, #ffe 100%);
+}
+
+#menu {
+	li {
+		i {
+			@extend .fa;
+		}
+
+		&.main i {
+			@extend .fa-desktop;
+		}
+
+		&.slides i {
+			@extend .fa-picture-o;
+		}
+
+		&.queues i {
+			@extend .fa-folder-open;
+		}
+
+		&.maintenance i {
+			@extend .fa-wrench;
+		}
+	}
+}
+
+.daemonstatus {
+	white-space: nowrap;
+	line-height: 19px;
+}

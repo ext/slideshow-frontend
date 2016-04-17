@@ -34,7 +34,7 @@
 		</div>
 
 		<?python empty_queue = active.id == 0 or len(active) == 0 ?>
-		<div id="empty_notice" class="notice" py:attrs="{'style': 'display:' + (empty_queue and 'block' or 'none')}">
+		<div id="empty_notice" class="alert alert-danger" py:attrs="{'style': 'display:' + (empty_queue and 'block' or 'none')}">
 			The current active queue is empty. You can create some slides and move them into the active queue.
 		</div>
 
