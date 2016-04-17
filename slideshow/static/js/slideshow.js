@@ -132,7 +132,6 @@ var slide = function(){
 			return post("/slides/ajax/activate", {id: id}, function(data){
 				parent = '#slide_' + id;
 				$(parent).attr('class', data.class);
-				console.log('actiaved');
 			});
 		},
 
@@ -140,7 +139,6 @@ var slide = function(){
 			return post("/slides/ajax/deactivate", {id: id}, function(data){
 				parent = '#slide_' + id;
 				$(parent).attr('class', data.class);
-				console.log('deactiaved');
 			});
 		},
 	};
@@ -207,8 +205,6 @@ function update_browserstring(){
 }
 
 function config_open(section){
-	console.log('open section ' + section);
-
 	/* reset current selection */
 	$('#sidebar a').attr('class', '');
 	$('.conf fieldset').hide();
