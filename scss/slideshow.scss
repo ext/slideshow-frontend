@@ -192,11 +192,11 @@ body {
 	opacity: 0.2;
 }
 
-.disabled .hide {
+.disabled .slide-hide {
 	display: none;
 }
 
-.disabled .show {
+.disabled .slide-show {
 	display: inline !important;
 }
 
@@ -239,13 +239,13 @@ body {
 	background: transparent url('/static/icon/page_white_edit.png') no-repeat center left;
 }
 
-.slide .hide {
+.slide .slide-hide {
 	padding: 2px 0px 2px 16px;
 	background: transparent url('/static/icon/picture_empty.png') no-repeat center left;
   /* display is controlled by .disabled */
 }
 
-.slide .show {
+.slide .slide-show {
 	padding: 2px 0px 2px 16px;
 	background: transparent url('/static/icon/picture.png') no-repeat center left;
   display: none; /* overridden by .disabled */

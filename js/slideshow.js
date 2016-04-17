@@ -129,13 +129,13 @@ var slide = (function(){
 
 		activate: function(id){
 			return post("/slides/ajax/activate", {id: id}, function(data){
-				$('#slide_' + id).attr('class', data.class);
+				$('#slide_' + id + ' > .slide').attr('class', data.class);
 			});
 		},
 
 		deactivate: function(id){
 			return post("/slides/ajax/deactivate", {id: id}, function(data){
-				$('#slide_' + id).attr('class', data.class);
+				$('#slide_' + id + ' > .slide').attr('class', data.class);
 			});
 		},
 	};
