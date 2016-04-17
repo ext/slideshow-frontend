@@ -3,6 +3,8 @@
 /* global queue:true, slide:true, config:true */
 
 var queue = function(){
+	'use strict';
+
 	function all_queues_except(id){
 		return queues.filter(function(x){ return x !== id; });
 	}
@@ -61,6 +63,8 @@ var queue = function(){
 }();
 
 var slide = function(){
+	'use strict';
+
 	var post = function(url, data, func){
 		$.ajax({
 			type: "POST",
@@ -136,6 +140,8 @@ var slide = function(){
 }();
 
 var config = function(){
+	'use strict';
+
 	function preview_transition(){
 		var selected = $('.conf .transition :selected').val();
 		$('#transition_preview').html('<img src="/transition/' + selected + '.gif" />');
@@ -147,6 +153,8 @@ var config = function(){
 }();
 
 $(document).ready(function(){
+	'use strict';
+
 	/* enable sorting on main page */
 	queue.sorting();
 
@@ -176,6 +184,8 @@ $(document).ready(function(){
 });
 
 function update_browserstring(){
+	'use strict';
+
 	var provider = $("input[name='Database.Provider']").val();
 	var username = $("input[name='Database.Username']").val();
 	var hostname = $("input[name='Database.Hostname']").val();
@@ -196,6 +206,8 @@ function update_browserstring(){
 }
 
 function config_open(section){
+	'use strict';
+
 	/* reset current selection */
 	$('#sidebar a').attr('class', '');
 	$('.conf fieldset').hide();
@@ -207,6 +219,8 @@ function config_open(section){
 var $text_preview_fields = [];
 var text_preview_timer;
 function text_preview(){
+	'use strict';
+
 	clearTimeout(text_preview_timer);
 
 	var data = {};
@@ -218,6 +232,8 @@ function text_preview(){
 }
 
 function text_preview_init(){
+	'use strict';
+
 	$text_preview_fields = $('#assembler_text .fields span').find('input, textarea');
 	$text_preview_fields.each(function(){
 		$(this).blur(text_preview);
