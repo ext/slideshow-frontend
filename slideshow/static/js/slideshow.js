@@ -216,33 +216,41 @@ function config_open(section){
 	$('#conf_'+section).show();
 }
 
-var $text_preview_fields = [];
-var text_preview_timer;
-function text_preview(){
+/* text preview (see text assembler) */
+(function($){
 	'use strict';
 
-	clearTimeout(text_preview_timer);
+	var delay = 800; /* ms */
+	var fields = [];
+	var timer;
 
-	var data = {};
-	$text_preview_fields.each(function(){
-		data[$(this).attr('name')] = $(this).val();
-	});
+	return $(init);
 
-	$('#assembler_text .preview img').attr('src', '/slides/preview?' + $.param(data));
-}
-
-function text_preview_init(){
-	'use strict';
-
-	$text_preview_fields = $('#assembler_text .fields span').find('input, textarea');
-	$text_preview_fields.each(function(){
-		$(this).blur(text_preview);
-		$(this).keydown(function(){
-			clearTimeout(text_preview_timer);
-			text_preview_timer = setTimeout(text_preview, 800);
+	function getParams(){
+		var data = {};
+		fields.each(function(){
+			data[$(this).attr('name')] = $(this).val();
 		});
-	});
+		return $.param(data);
+	}
 
-	/* initial preview */
-	text_preview();
-}
+	function update(){
+		var url = '/slides/preview?' + getParams();
+		$('img.preview-target').attr('src', url);
+	}
+
+	function init(){
+		fields = $('.assembler.have-preview .trigger-preview').find('input, textarea');
+		fields
+			.blur(update)
+			.keydown(function(){
+				clearTimeout(timer);
+				timer = setTimeout(update, delay);
+			})
+		;
+
+		/* initial preview */
+		update();
+	}
+
+})(jQuery);

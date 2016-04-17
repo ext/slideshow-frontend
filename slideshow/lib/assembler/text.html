@@ -1,11 +1,5 @@
 <assembler xmlns:py="http://genshi.edgewall.org/">
-	<fieldset id="assembler_text" class="assembler foldable">
-		<script type="text/javascript">
-			//<![CDATA[
-			$(document).ready(text_preview_init);
-			//]]>
-		</script>
-
+	<fieldset id="assembler_text" class="assembler foldable have-preview">
 		<legend>Text <a href="#" onclick="return $('#assembler_text').foldable('toggle');" class="folding"></a></legend>
 		<input type="hidden" name="assembler" value="${assembler.name}" />
 		<input type="hidden" name="context" value="${context}" />
@@ -13,11 +7,11 @@
 
 		<div class="wrapper">
 			<div class="preview">
-				<img src="/slides/preview?${preview}" />
+				<img class="preview-target" src="/slides/preview?${preview}" />
 			</div>
 
 			<div class="fields">
-				<span py:for="item in template.items()">
+				<span class="trigger-preview" py:for="item in template.items()">
 					${Markup(item.render(content.get(item.name, '')))}
 				</span>
 				<p class="help">
