@@ -44,6 +44,9 @@ class Slide(object):
             'id': self.id,
             'timestamp': self.timestamp,
             'active': self.active,
+            'is_viewable': self.assembler.is_viewable(),
+            'is_playable': self.assembler.is_playable(),
+            'is_editable': self.assembler.is_editable(),
         }
 
     def __getattribute__(self, key):
