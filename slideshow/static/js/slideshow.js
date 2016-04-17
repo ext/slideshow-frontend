@@ -16,37 +16,39 @@ var queue = function(){
 				return;
 			}
 
+			function updated(){
+				var current_id = '#' + $(this).attr('id');
+				var list = $(this).sortable('toArray');
+				var n = list.length;
+
+				/* show/hide warning about empty queue */
+				if ( current_id === active ){
+					if ( notice_visible && n > 0 ){
+						notice_visible = false;
+						$("#empty_notice").fadeOut("slow");
+					}
+					if ( !notice_visible && n === 0 ){
+						notice_visible = true;
+						$("#empty_notice").fadeIn("slow");
+					}
+				}
+
+				/* notify server about update */
+				$.ajax({
+					type: "POST",
+					url: "/slides/ajax/move",
+					data: "queue=" + $(this).attr('id') + "&slides=" + list,
+					error: function(x, status, error){
+						alert(status + '\n' + error);
+					},
+				});
+			}
+
 			/* queues is a global variable */
 			for ( var i in queues ){
 				var id = queues[i];
 				var other = all_queues_except(id);
-				$(id).bind('updated', function(){
-					var current_id = '#' + $(this).attr('id');
-					var list = $(this).sortable('toArray');
-					var n = list.length;
-
-					/* show/hide warning about empty queue */
-					if ( current_id === active ){
-						if ( notice_visible && n > 0 ){
-							notice_visible = false;
-							$("#empty_notice").fadeOut("slow");
-						}
-						if ( !notice_visible && n === 0 ){
-							notice_visible = true;
-							$("#empty_notice").fadeIn("slow");
-						}
-					}
-
-					/* notify server about update */
-					$.ajax({
-						type: "POST",
-						url: "/slides/ajax/move",
-						data: "queue=" + $(this).attr('id') + "&slides=" + list,
-						error: function(x, status, error){
-							alert(status + '\n' + error);
-						},
-					});
-				});
+				$(id).bind('updated', updated);
 				$(id).sortable({
 					connectWith: other,
 					placeholder: 'slide_placeholder',
