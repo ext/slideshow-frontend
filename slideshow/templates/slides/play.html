@@ -1,7 +1,7 @@
-<html xmlns="http://www.w3.org/1999/xhtml" 
-	xmlns:py="http://genshi.edgewall.org/" 
-	xmlns:xi="http://www.w3.org/2001/XInclude" 
-	lang="en"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:py="http://genshi.edgewall.org/"
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	lang="en">
 	<xi:include href="../index.html" />
 
 <head>
@@ -10,20 +10,20 @@
 
 <body>
 	<h2>${title}</h2>
-	
+
 	<py:choose test="stream">
 		<py:when test="None">
 			<p>Preview is not yet available.</p>
 		</py:when>
 		<py:otherwise>
-			<a id="player" style="display:block;width:425px;height:300px;" href="${stream}"></a> 
+			<a id="player" style="display:block;width:425px;height:300px;" href="${stream}"></a>
 			<script type="text/javascript">
-				flowplayer("player", "/static/flowplayer-3.2.5.swf", {
-					clip:{
-						autoPlay: true,
-						autoBuffering: true
-					}
-				});
+			flowplayer("player", "/static/flowplayer-3.2.5.swf", {
+				clip: {
+					autoPlay: true,
+					autoBuffering: true,
+				},
+			});
 			</script>
 		</py:otherwise>
 	</py:choose>
