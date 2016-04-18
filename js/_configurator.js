@@ -1,5 +1,6 @@
 /* exported configurator */
 /* global configurator:true */
+/* eslint-disable angular/angularelement */
 
 var configurator = (function($){
 	'use strict';

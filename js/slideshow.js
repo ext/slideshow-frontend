@@ -1,5 +1,6 @@
 /* global queues:false, active:false, notice_visible:true */
 /* global queue:true, slide:true */
+/* eslint-disable angular/angularelement, angular/definedundefined, angular/log */
 
 var queue = (function(){
 	'use strict';

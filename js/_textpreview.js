@@ -1,3 +1,5 @@
+/* eslint-disable angular/angularelement, angular/timeout-service */
+
 /* text preview (see text assembler) */
 (function($){
 	'use strict';
