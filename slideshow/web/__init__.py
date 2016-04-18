@@ -19,7 +19,7 @@ from slideshow.pages import instance
 from slideshow.pages import slides
 from slideshow.pages import maintenance
 from slideshow.pages import queue
-from slideshow.pages.api import HandlerV1 as ApiHandlerV1
+from slideshow.rest import RESTHandlerV1
 from slideshow.settings import Settings, ValidationError
 from slideshow.daemon import Daemon
 from slideshow.video_preview import PreviewCreator
@@ -293,7 +293,7 @@ def run():
                 'tools.staticdir.dir': '../static',
                 },
             })
-        api_app = cherrypy.tree.mount(ApiHandlerV1(), '/api/v1')
+        api_app = cherrypy.tree.mount(RESTHandlerV1(), '/api/v1')
         api_app.config.update({
             '/': {
                 'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
