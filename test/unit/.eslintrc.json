@@ -6,5 +6,8 @@
   "globals": {
     "inject": true
   },
-  "plugins": ["jasmine", "angular"]
+  "plugins": ["jasmine", "angular"],
+  "rules": {
+    "consistent-this": 0
+  }
 }

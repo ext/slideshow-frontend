@@ -9,6 +9,7 @@
 				'./node_modules/angular/angular.js',
 				'./node_modules/angular-mocks/angular-mocks.js',
 				'js/slideshow.module.js',
+				'js/controller/*.js',
 				'js/service/*.js',
 				'test/unit/**/*.spec.js',
 			],

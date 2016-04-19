@@ -41,12 +41,3 @@ body {
 		}
 	}
 }
-
-.daemonstatus {
-	white-space: nowrap;
-	line-height: 19px;
-
-	&.daemon-crashed strong {
-		color: #f00;
-	}
-}
