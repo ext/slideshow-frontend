@@ -35,7 +35,7 @@ def output(filename, method='xhtml', encoding='utf-8', doctype=None, parent='mai
             cherrypy.thread_data.template = loader.load(filename)
             cherrypy.thread_data.parent = parent
             opt = options.copy()
-            
+
             # if no doctype is set, try to autodetect
             # if doctype is False, skip doctype
             # if doctype is set, use it
@@ -46,10 +46,10 @@ def output(filename, method='xhtml', encoding='utf-8', doctype=None, parent='mai
                     opt.setdefault('doctype', 'xhtml')
             elif doctype is not False:
                 opt.setdefault('doctype', doctype)
-            
+
             serializer = get_serializer(method, **opt)
             stream = func(*args, **kwargs)
-            
+
             if not isinstance(stream, Stream):
                 return stream
             return encode(serializer(stream), method=serializer,
@@ -73,7 +73,7 @@ def render(*args, **kwargs):
     ctxt['daemon'] = daemon.state()
     ctxt['daemonstr'] = daemon.statename(daemon.state())
     ctxt['username'] = cherrypy.request.login
-    
+
     ctxt['_'] = lambda x: x # trans.ugettext
-	
+
     return template.generate(ctxt)
