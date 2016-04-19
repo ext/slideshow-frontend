@@ -287,6 +287,7 @@ def run():
                 'tools.gzip.on': True,
                 'tools.encode.on': True,
                 'tools.encode.encoding': 'utf8',
+                'tools.sessions.on': True,
                 },
             '/static': {
                 'tools.staticdir.on': True,
