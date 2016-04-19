@@ -84,7 +84,11 @@ class Handler(object):
 
     @cherrypy.expose
     def start(self, resolution=None, fullscreen=True):
-        daemon.start(resolution, fullscreen)
+        try:
+            daemon.start(resolution, fullscreen)
+        except Exception, e:
+            traceback.print_exc()
+            cherrypy.session['flash'] = [('error', str(e))]
         raise cherrypy.HTTPRedirect('/maintenance')
 
     @cherrypy.expose

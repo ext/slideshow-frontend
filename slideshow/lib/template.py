@@ -57,6 +57,13 @@ def output(filename, method='xhtml', encoding='utf-8', doctype=None, parent='mai
         return wrapper
     return decorate
 
+def flash():
+    # convert flash severity to classes
+    flash_severity = {
+        'error': 'danger'
+    }
+    return [(flash_severity.get(i[0], i[0]), i[1]) for i in cherrypy.session.pop('flash', [])]
+
 def render(*args, **kwargs):
     """Function to render the given data to the template specified via the
     ``@output`` decorator.
@@ -73,6 +80,7 @@ def render(*args, **kwargs):
     ctxt['daemon'] = daemon.state()
     ctxt['daemonstr'] = daemon.statename(daemon.state())
     ctxt['username'] = cherrypy.request.login
+    ctxt['flash'] = flash()
 
     ctxt['_'] = lambda x: x # trans.ugettext
 
