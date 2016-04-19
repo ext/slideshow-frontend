@@ -41,6 +41,7 @@ class Queue:
             'id': self.id,
             'name': self.name,
             'loop': self.loop,
+            'readonly': self.id <= 1,
             'slides': [x.as_json() for x in self.slides]
         }
 
