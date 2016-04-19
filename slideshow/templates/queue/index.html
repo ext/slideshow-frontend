@@ -84,15 +84,17 @@
 
 	<div class="row">
 		<div class="col-sm-6">
-			<form action="/queue/add" method="post">
-				<h3>Create new queue</h3>
-				<label class="control-label">Name</label>
-				<div class="input-group">
-					<input class="form-control" type="text" name="name" required="required" />
-					<span class="input-group-btn">
-						<button class="btn btn-default" name="submit" type="submit">Create</button>
-					</span>
-				</div>
+			<form name="createForm" ng-submit="vm.create(createForm)">
+				<fieldset ng-disabled="vm.saving">
+					<legend>Create new queue</legend>
+					<label class="control-label">Name</label>
+					<div class="input-group">
+						<input class="form-control" type="text" name="name" ng-model="vm.name" required="required" />
+						<span class="input-group-btn">
+							<button class="btn btn-default" name="submit" type="submit" ng-disabled="vm.saving">Create</button>
+						</span>
+					</div>
+				</fieldset>
 			</form>
 		</div>
 	</div>

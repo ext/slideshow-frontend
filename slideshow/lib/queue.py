@@ -105,6 +105,8 @@ def add(c, name):
         print 'derp'
         activate(row_id)
 
+    return from_id(c, row_id)
+
 def delete(c, id):
     if id <= 0:
         return False
