@@ -16,16 +16,16 @@ import pipes
 _signal_lut = dict((k, v) for v, k in signal.__dict__.iteritems() if v.startswith('SIG') and not v.startswith('SIG_'))
 
 _states = {
-    1<<0: 'STOPPED',
-    1<<1: 'STOPPING',
-    1<<2: 'STARTING',
-    1<<3: 'RUNNING',
-    1<<4: 'CRASHED'
+    1<<0: 'stopped',
+    1<<1: 'stopping',
+    1<<2: 'starting',
+    1<<3: 'running',
+    1<<4: 'crashed'
     }
 
 # the reverse of k,v is deliberate
 for v,k in _states.items():
-    sys.modules[__name__].__dict__[k] = v
+    sys.modules[__name__].__dict__[k.upper()] = v
 
 html_escape_table = {
     "&": "&amp;",

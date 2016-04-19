@@ -40,8 +40,8 @@
 	?>
 
 	<py:match path="body" once="true">
-		<body py:attrs="select('@*')">
-			<header>
+		<body py:attrs="select('@*')" ng-app="slideshow" ng-strict-di="">
+			<header ng-controller="StatusController as vm">
 				<nav class="navbar navbar-default">
 					<div class="container-fluid">
 						<div class="navbar-header">
@@ -63,7 +63,7 @@
 								</py:for>
 							</ul>
 
-							<p class="navbar-text navbar-right daemonstatus daemon-${daemonstr.lower()}">Status: <strong>${daemonstr}</strong></p>
+							<p class="navbar-text navbar-right daemonstatus" ng-class="vm.stateClass">Status: <strong>{{vm.stateName}}</strong></p>
 						</div>
 					</div>
 				</nav>

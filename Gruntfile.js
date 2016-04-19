@@ -5,9 +5,11 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-eslint');
+	grunt.loadNpmTasks('grunt-karma');
 	grunt.loadNpmTasks('grunt-sass');
 
-	grunt.registerTask('build', ['copy', 'sass', 'uglify']);
+	grunt.registerTask('build', ['copy', 'sass', 'test', 'uglify']);
+	grunt.registerTask('test', ['eslint', 'karma']);
 	grunt.registerTask('default', ['build']);
 
 	grunt.initConfig({
@@ -38,6 +40,7 @@ module.exports = function(grunt){
 			build: [
 				'Gruntfile.js',
 				'js/**/*.js',
+				'test/**/*.js',
 			],
 		},
 
@@ -63,13 +66,18 @@ module.exports = function(grunt){
 			},
 			build: {
 				files: {
-					'slideshow/static/js/slideshow.min.js': ['js/**/*.js'],
+					'slideshow/static/js/slideshow.min.js': [
+						'js/slideshow.js',
+						'js/slideshow.module.js',
+						'js/**/*.js',
+					],
 				},
 			},
 			libs: {
 				files: {
 					'slideshow/static/js/libs.min.js': [
 						'node_modules/jquery/dist/jquery.js',
+						'node_modules/angular/angular.js',
 						'node_modules/bootstrap-sass/assets/javascripts/bootstrap.js',
 						'node_modules/jquery-hoverintent/jquery.hoverIntent.js',
 					],
@@ -77,10 +85,16 @@ module.exports = function(grunt){
 			},
 		},
 
+		karma: {
+			unit: {
+				configFile: 'test/karma.conf.js',
+			},
+		},
+
 		watch: {
 			js: {
 				files: ['<%= eslint.build %>'],
-				tasks: ['eslint', 'uglify:build'],
+				tasks: ['test', 'uglify:build'],
 			},
 			scss: {
 				files: ['scss/**/*.scss'],

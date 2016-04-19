@@ -1,0 +1,22 @@
+.daemonstatus {
+	white-space: nowrap;
+	line-height: 19px;
+
+	strong {
+		text-transform: uppercase;
+	}
+
+	&.daemon-crashed,
+	&.daemon-stopped {
+		strong {
+			color: #f00;
+		}
+	}
+
+	&.daemon-fetching {
+		strong::after {
+			content: '(polling)';
+			color: #ccc;
+		}
+	}
+}

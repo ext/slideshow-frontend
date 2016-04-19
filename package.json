@@ -13,19 +13,27 @@
   "author": "David Sveningsson <ext@sidvind.com>",
   "license": "AGPL-3.0",
   "dependencies": {
+    "angular": "^1.5.3",
     "bootstrap-sass": "^3.3.6",
     "font-awesome": "^4.6.1",
     "jquery": "^2.2.3",
     "phantomjs-prebuilt": "^2.1.6"
   },
   "devDependencies": {
+    "angular-mocks": "^1.5.5",
     "eslint": "^2.8.0",
+    "eslint-config-angular": "^0.5.0",
+    "eslint-plugin-angular": "^1.0.0",
     "grunt": "^0.4.5",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-uglify": "^0.11.1",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-eslint": "^18.1.0",
+    "grunt-karma": "^0.12.2",
     "grunt-sass": "^1.1.0",
-    "jquery-hoverintent": "1.8.1"
+    "jasmine-core": "^2.4.1",
+    "jquery-hoverintent": "1.8.1",
+    "karma": "^0.13.22",
+    "karma-jasmine": "^0.3.8"
   }
 }

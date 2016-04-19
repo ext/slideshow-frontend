@@ -1,0 +1,13 @@
+{
+  "env": {
+    "jasmine": true,
+    "angular/mocks": true
+  },
+  "globals": {
+    "inject": true
+  },
+  "plugins": ["jasmine", "angular"],
+  "rules": {
+    "consistent-this": 0
+  }
+}
