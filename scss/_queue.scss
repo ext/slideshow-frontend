@@ -1,0 +1,20 @@
+ul.queue-list {
+	padding: 0;
+	list-style: none;
+
+	li {
+		i {
+			@extend .fa;
+			@extend .fa-fw;
+			@extend .fa-pencil;
+		}
+	}
+
+	li.readonly {
+		color: grey;
+
+		i {
+			@extend .fa-lock;
+		}
+	}
+}
