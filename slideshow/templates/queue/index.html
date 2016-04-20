@@ -9,19 +9,6 @@
 <head>
 	<title>Queue</title>
 
-	<style>
-		#content ul {
-			list-style-type:none;
-			margin-left: 1em;
-			padding:0;
-		}
-		#content ul li {
-			background:url('/static/icon/page_white_edit.png') left center no-repeat;
-			padding-left: 20px;
-			margin:0;
-		}
-	</style>
-
 	<script type="text/javascript">// <![CDATA[
 
 	$.editable.addInputType('rename', {
@@ -60,43 +47,57 @@
 		}
 	});
 
-	$(function() {
-		$('.edit').editable('/queue/ajax/rename', {
-			type : 'rename',
-			tooltip   : "Click to edit...",
-			cancel    : 'Cancel',
-			submit    : 'OK',
-			remove    : 'Remove',
-			style     : 'display: inline'
+		/* glue between angular and jquery.editable */
+		angular.module('slideshow').directive('editable', function(){
+			return {
+				restrict: 'A',
+				scope: {
+					readonly: '=',
+				},
+				link: function(scope, elem){
+					if ( scope.readonly ) return;
+
+					elem.editable('/queue/ajax/rename', {
+						type : 'rename',
+						tooltip   : "Click to edit...",
+						cancel    : 'Cancel',
+						submit    : 'OK',
+						remove    : 'Remove',
+						style     : 'display: inline'
+					});
+				},
+			};
 		});
-	});
 
 	// ]]></script>
 
 </head>
 
-<body>
+<body ng-controller="QueueManagerController as vm">
 	<h2>Manage queues</h2>
 
-	<script type="text/javascript">
-		//<![CDATA[
-			document.write('<p>Click on the queue you wish to edit.</p>');
-		//]]>
-	</script>
-
-	<ul>
-		<li py:for="queue in queues" py:attrs="queue.id > 1 and {'style': ''} or {'style': 'background: none; color: grey;'}">
-			<span py:attrs="queue.id > 1 and {'class': 'edit'} or {}" id="queue_${queue.id}">${queue.name}</span>
-			<noscript py:if="queue.id > 0">
-				(<a href="/queue/rename/${queue.id}">Rename</a>, <a href="/queue/delete/${queue.id}">Delete</a>)
-			</noscript>
+	<ul class="queue-list">
+		<li ng-repeat="item in vm.queue | orderBy:'id'" ng-class="{'readonly': item.readonly}">
+			<i></i> <span editable="" readonly="item.readonly" id="queue_{{item.id}}">{{item.name}}</span>
 		</li>
 	</ul>
 
-	<form action="/queue/add" method="post">
-		<input type="text" name="name" />
-		<input type="submit" name="submit" value="Create" />
-	</form>
+	<div class="row">
+		<div class="col-sm-6">
+			<form name="createForm" ng-submit="vm.create(createForm)">
+				<fieldset ng-disabled="vm.saving">
+					<legend>Create new queue</legend>
+					<label class="control-label">Name</label>
+					<div class="input-group">
+						<input class="form-control" type="text" name="name" ng-model="vm.name" required="required" />
+						<span class="input-group-btn">
+							<button class="btn btn-default" name="submit" type="submit" ng-disabled="vm.saving">Create</button>
+						</span>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
 
 </body>
 

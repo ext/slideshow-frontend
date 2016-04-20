@@ -41,6 +41,7 @@ class Queue:
             'id': self.id,
             'name': self.name,
             'loop': self.loop,
+            'readonly': self.id <= 1,
             'slides': [x.as_json() for x in self.slides]
         }
 
@@ -103,6 +104,8 @@ def add(c, name):
     if n == 3:
         print 'derp'
         activate(row_id)
+
+    return from_id(c, row_id)
 
 def delete(c, id):
     if id <= 0:
