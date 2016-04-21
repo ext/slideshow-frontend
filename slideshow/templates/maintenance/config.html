@@ -15,17 +15,19 @@
 			<div class="col-lg-8">
 
 				<form name="configuration" ng-submit="vm.submit(configuration)">
-					<fieldset class="row" py:for="group in settings" py:if="not group.hidden" id="conf_${group.name}" title="${group.name}">
+					<fieldset py:for="group in settings" py:if="not group.hidden" id="conf_${group.name}" title="${group.name}">
 						<legend>${group.name}</legend>
 
-						<div class="col-sm-6 col-sm-push-6">
-							<div class="alert alert-info" py:for="desc, attr in group.description" py:attrs="attr">${Markup(desc)}</div>
-						</div>
+						<div class="row">
+							<div class="col-sm-6 col-sm-push-6">
+								<div class="alert alert-info" py:for="desc, attr in group.description" py:attrs="attr">${Markup(desc)}</div>
+							</div>
 
-						<div class="col-sm-6 col-sm-pull-6">
-							<py:for each="item in group">
-								${Markup(item)}
-							</py:for>
+							<div class="col-sm-6 col-sm-pull-6">
+								<py:for each="item in group">
+									${Markup(item)}
+								</py:for>
+							</div>
 						</div>
 					</fieldset>
 
