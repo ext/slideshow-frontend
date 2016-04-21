@@ -86,7 +86,10 @@ class Item:
         self.rel = rel
         self._value = self.default
 
-        self._attributes = {'name': '%s.%s' % (group.name, name)}
+        self._attributes = {
+            'name': '%s.%s' % (group.name, name),
+            'ng-model': 'vm.configuration.%s.%s' % (group.name, name),
+        }
         self._attributes.update(kwargs)
 
         if title is not None:
@@ -498,7 +501,7 @@ class Settings(object):
             return
 
         item = self.item(key)
-        old = item.set(value)
+        old = item.set(value, True)
 
         if key == 'Appearance.Resolution' and item._value != old:
             event.trigger('config.resolution_changed', self.resolution())

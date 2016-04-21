@@ -6,6 +6,7 @@
 *.py[oc]
 *.map
 
+/js/template.js
 /node_modules
 /slideshow/static/css
 /slideshow/static/fonts
