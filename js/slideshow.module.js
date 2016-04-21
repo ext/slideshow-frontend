@@ -1,6 +1,8 @@
 (function(){
 	'use strict';
 
-	angular.module('slideshow', []);
+	angular.module('slideshow', [
+		'slideshow.templates',
+	]);
 
 })();

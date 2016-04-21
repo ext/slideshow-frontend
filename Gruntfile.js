@@ -5,10 +5,11 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-eslint');
+	grunt.loadNpmTasks('grunt-html2js');
 	grunt.loadNpmTasks('grunt-karma');
 	grunt.loadNpmTasks('grunt-sass');
 
-	grunt.registerTask('build', ['copy', 'sass', 'test', 'uglify']);
+	grunt.registerTask('build', ['copy', 'sass', 'html2js', 'test', 'uglify']);
 	grunt.registerTask('test', ['eslint', 'karma']);
 	grunt.registerTask('default', ['build']);
 
@@ -36,11 +37,26 @@ module.exports = function(grunt){
 			},
 		},
 
+		html2js: {
+			build: {
+				options: {
+					base: 'js',
+					rename: function(name){
+						return '/template/' + name;
+					},
+				},
+				src: 'js/**/*.html',
+				dest: 'js/template.js',
+				module: 'slideshow.templates',
+			},
+		},
+
 		eslint: {
 			build: [
 				'Gruntfile.js',
 				'js/**/*.js',
 				'test/**/*.js',
+				'!js/template.js',
 			],
 		},
 
@@ -95,6 +111,10 @@ module.exports = function(grunt){
 			js: {
 				files: ['<%= eslint.build %>'],
 				tasks: ['uglify:build', 'test'],
+			},
+			html: {
+				files: ['<%= html2js.build.src %>'],
+				tasks: ['html2js', 'uglify:build', 'test'],
 			},
 			scss: {
 				files: ['scss/**/*.scss'],

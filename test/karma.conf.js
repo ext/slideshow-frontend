@@ -12,6 +12,7 @@
 				'js/controller/*.js',
 				'js/directive/*.js',
 				'js/service/*.js',
+				'js/template.js',
 				'test/unit/**/*.spec.js',
 			],
 

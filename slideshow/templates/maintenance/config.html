@@ -13,27 +13,20 @@
 
 		<div class="row">
 			<div class="col-lg-8">
-
 				<form name="configuration" ng-submit="vm.submit(configuration)">
-					<fieldset py:for="group in settings" py:if="not group.hidden" id="conf_${group.name}" title="${group.name}">
-						<legend>${group.name}</legend>
-
-						<div class="row">
-							<div class="col-sm-6 col-sm-push-6">
-								<div class="alert alert-info" py:for="desc, attr in group.description" py:attrs="attr">${Markup(desc)}</div>
-							</div>
-
-							<div class="col-sm-6 col-sm-pull-6">
-								<py:for each="item in group">
-									${Markup(item)}
-								</py:for>
-							</div>
+					<configuration-group name="${group.name}" py:for="group in settings" py:if="not group.hidden">
+						<div class="col-sm-6 col-sm-push-6">
+							<div class="alert alert-info" py:for="desc, attr in group.description" py:attrs="attr">${Markup(desc)}</div>
 						</div>
-					</fieldset>
 
-					<fieldset id="conf_Environmental" title="Environmental variables">
-						<legend>Environmental variables</legend>
+						<div class="col-sm-6 col-sm-pull-6">
+							<py:for each="item in group">
+								${Markup(item)}
+							</py:for>
+						</div>
+					</configuration-group>
 
+					<configuration-group name="Environmental variables">
 						<div class="col-sm-6 col-sm-push-6">
 							<div class="alert alert-info">
 								Place each variable in the form key=value with each variable
@@ -48,7 +41,7 @@
 								<textarea class="form-control" name="Env" configuration-environment="" ng-model="vm.configuration.Env"></textarea>
 							</div>
 						</div>
-					</fieldset>
+					</configuration-group>
 
 					<div class="clearfix">
 						<a class="btn btn-default pull-left" href="/maintenance">Cancel</a>
