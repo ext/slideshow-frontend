@@ -501,7 +501,7 @@ class Settings(object):
             return
 
         item = self.item(key)
-        old = item.set(value)
+        old = item.set(value, True)
 
         if key == 'Appearance.Resolution' and item._value != old:
             event.trigger('config.resolution_changed', self.resolution())
