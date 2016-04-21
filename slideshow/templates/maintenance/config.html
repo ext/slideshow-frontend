@@ -8,13 +8,13 @@
 		<title>Configuration</title>
 	</head>
 
-	<body id="configurator">
+	<body id="configurator" ng-controller="ConfigurationController as vm">
 		<h2>Configuration</h2>
 
 		<div class="row">
 			<div class="col-lg-8">
 
-				<form id="form" method="post" action="/maintenance/config/save">
+				<form name="configuration" ng-submit="vm.submit(configuration)">
 					<fieldset class="row" py:for="group in settings" py:if="not group.hidden" id="conf_${group.name}" title="${group.name}">
 						<legend>${group.name}</legend>
 
@@ -43,7 +43,7 @@
 						<div class="col-sm-6 col-sm-pull-6">
 							<div class="form-group">
 								<label class="control-label">Enviroment</label>
-								<textarea class="form-control" name="Env"><py:for each="k,v in settings['Env'].items()">${k}=${v}${Markup("\n")}</py:for></textarea>
+								<textarea class="form-control" name="Env" configuration-environment="" ng-model="vm.configuration.Env"></textarea>
 							</div>
 						</div>
 					</fieldset>

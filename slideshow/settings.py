@@ -86,7 +86,10 @@ class Item:
         self.rel = rel
         self._value = self.default
 
-        self._attributes = {'name': '%s.%s' % (group.name, name)}
+        self._attributes = {
+            'name': '%s.%s' % (group.name, name),
+            'ng-model': 'vm.configuration.%s.%s' % (group.name, name),
+        }
         self._attributes.update(kwargs)
 
         if title is not None:
