@@ -94,7 +94,7 @@ module.exports = function(grunt){
 		watch: {
 			js: {
 				files: ['<%= eslint.build %>'],
-				tasks: ['test', 'uglify:build'],
+				tasks: ['uglify:build', 'test'],
 			},
 			scss: {
 				files: ['scss/**/*.scss'],
