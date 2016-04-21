@@ -69,6 +69,56 @@
 			expect(ConfigurationAPI.update).not.toHaveBeenCalled();
 		});
 
+		describe('should update connection string', function(){
+
+			it('given nothing', function(){
+				vm.configuration.Database = undefined;
+				vm.updateConnection();
+				expect(vm.connection).toBe('');
+			});
+
+			it('given provider and name', function(){
+				vm.configuration.Database = {
+					Provider: 'foo',
+					Name: 'bar',
+				};
+				vm.updateConnection();
+				expect(vm.connection).toBe('foo://bar');
+			});
+
+			it('given provider, name, username', function(){
+				vm.configuration.Database = {
+					Provider: 'foo',
+					Name: 'bar',
+					Username: 'fred',
+				};
+				vm.updateConnection();
+				expect(vm.connection).toBe('foo://fred@bar');
+			});
+
+			it('given provider, name, hostname', function(){
+				vm.configuration.Database = {
+					Provider: 'foo',
+					Name: 'bar',
+					Hostname: 'barney',
+				};
+				vm.updateConnection();
+				expect(vm.connection).toBe('foo://barney/bar');
+			});
+
+			it('given provider, name, hostname, username', function(){
+				vm.configuration.Database = {
+					Provider: 'foo',
+					Name: 'bar',
+					Hostname: 'barney',
+					Username: 'fred',
+				};
+				vm.updateConnection();
+				expect(vm.connection).toBe('foo://fred@barney/bar');
+			});
+
+		});
+
 	});
 
 })();

@@ -51,12 +51,12 @@
 	<group name="Database">
 		<description>Database settings. Leave the password blank unless you need to change it.</description>
 
-		<item name="String" title="" type="static" class="browserstring"></item>
-		<item name="Provider" type="string" class="browserblur">sqlite3</item>
-		<item name="Username" type="string" class="browserblur"></item>
-		<item name="Password" type="password" class="browserblur" autocomplete="false"></item>
-		<item name="Hostname" type="string" class="browserblur" autocomplete="false"></item>
-		<item name="Name" type="string" class="browserblur">site.db</item>
+		<item name="String" title="" type="static" ng-bind="vm.connection"></item>
+		<item name="Provider" type="string"   ng-change="vm.updateConnection()">sqlite3</item>
+		<item name="Username" type="string"   ng-change="vm.updateConnection()"></item>
+		<item name="Password" type="password" ng-change="vm.updateConnection()" autocomplete="false"></item>
+		<item name="Hostname" type="string"   ng-change="vm.updateConnection()" autocomplete="false"></item>
+		<item name="Name"     type="string"   ng-change="vm.updateConnection()">site.db</item>
 		<item name="URL" type="string">http://localhost</item>
 	</group>
 
