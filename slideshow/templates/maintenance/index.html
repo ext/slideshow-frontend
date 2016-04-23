@@ -16,10 +16,10 @@
 	</script>
 </head>
 
-<body>
+<body ng-controller="MaintenanceController as vm">
 	<h2>Maintenance</h2>
 
-	<py:if test="state == daemon.CRASHED">
+	<div ng-if="vm.state == 'crashed'">
 		<p>The slideshow daemon crashed. Please follow these steps: </p>
 		<ol>
 			<li>Download the <a href="/maintenance/coredump">coredump</a>.</li>
@@ -34,13 +34,13 @@
 			<li>Go bug <a href="mailto:ext@sidvind.com">ext</a> about it.</li>
 			<li><a href="/maintenance/reset">Reset</a>.</li>
 		</ol>
-	</py:if>
+	</div>
 
 	<h3>Menu</h3>
 	<ul>
-		<li py:if="state == daemon.STOPPED"><a href="/maintenance/start">Start daemon</a> (<a href="/maintenance/start?resolution=800x600&amp;fullscreen=0">windowed</a>)</li>
-		<li py:if="state == daemon.RUNNING"><a href="/maintenance/stop">Stop daemon</a></li>
-		<li py:if="state == daemon.RUNNING"><a href="/maintenance/reload">Reload daemon</a></li>
+		<li ng-if="vm.state == 'stopped'"><a href="/maintenance/start">Start daemon</a> (<a href="/maintenance/start?resolution=800x600&amp;fullscreen=0">windowed</a>)</li>
+		<li ng-if="vm.state == 'running'"><a href="/maintenance/stop">Stop daemon</a></li>
+		<li ng-if="vm.state == 'running'"><a href="/maintenance/reload">Reload daemon</a></li>
 		<li><a href="/maintenance/rebuild" onclick="return confirm('Warning!\n\nThis will rerasterize all slides with the selected theme. This can be an expensive\noperation depending on the number of slides.\n\nSlideshow will be locked until rebuild is complete.');">Rebuild cache</a></li>
 		<li><a href="/maintenance/config">Configuration</a></li>
 	</ul>
