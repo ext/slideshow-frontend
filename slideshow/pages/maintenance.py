@@ -7,13 +7,12 @@ from slideshow.settings import Settings, ItemCheckbox, ValidationError
 import slideshow.daemon as daemon
 import slideshow.event as event
 import traceback
-
-logcls = ['fatal', 'warning', 'info', 'verbose', 'debug']
+import json
 
 class Ajax(object):
     @cherrypy.expose
     def log(self):
-        return '<pre>' + '\n'.join(['<span class="%s">%s</span>' % (logcls[severity], line) for severity, line in daemon.log()]) + '</pre>'
+        return json.dumps([{'severity': severity, 'message': line} for severity, line in daemon.log()])
 
 class Handler(object):
     ajax = Ajax()
@@ -23,7 +22,7 @@ class Handler(object):
     def index(self):
         settings = Settings()
         cmd, args, env, cwd = daemon.settings(browser_factory.from_settings(settings))
-        return template.render(log=daemon.log(), logcls=logcls, state=daemon.state(), cmd=cmd, args=args, env=env, cwd=cwd)
+        return template.render(state=daemon.state(), cmd=cmd, args=args, env=env, cwd=cwd)
 
     @cherrypy.expose
     @template.output('maintenance/config.html', parent='maintenance')

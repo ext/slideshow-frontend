@@ -3,18 +3,8 @@
 	xmlns:xi="http://www.w3.org/2001/XInclude"
 	lang="en">
 	<xi:include href="../index.html" />
-<?python import slideshow.daemon as daemon ?>
 
-<head>
-	<script type="text/javascript" py:if="state == daemon.RUNNING">
-		function query_log(id){
-			$.get('/maintenance/ajax/log', function(data) {
-				$(id).html(data);
-			});
-		}
-		window.setInterval("query_log('#log')", 5000);
-	</script>
-</head>
+	<head></head>
 
 <body ng-controller="MaintenanceController as vm">
 	<h2>Maintenance</h2>
@@ -47,7 +37,7 @@
 
 	<h3>Log</h3>
 	<div id="log" class="mono">
-		<pre><span py:for="severity, line in log" class="${logcls[severity]}">${Markup(line)}
+		<pre><span ng-repeat="item in vm.log" class="{{vm.severityClass(item.severity)}}">{{item.message}}
 </span></pre>
 	</div>
 

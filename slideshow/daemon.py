@@ -27,19 +27,6 @@ _states = {
 for v,k in _states.items():
     sys.modules[__name__].__dict__[k.upper()] = v
 
-html_escape_table = {
-    "&": "&amp;",
-    '"': "&quot;",
-    "'": "&apos;",
-    ">": "&gt;",
-    "<": "&lt;",
-    " ": "&nbsp;",
-    "\t": "&nbsp;" * 4, # 4 is tabwidth
-    }
-
-def html_escape(text):
-    return "".join(html_escape_table.get(c,c) for c in text)
-
 def statename(state):
     return _states[state]
 
@@ -167,7 +154,7 @@ class _Log:
         lines.reverse()
 
         def f(severity, user, stamp, message):
-            severity_str = self.severity_revlut[severity].replace(' ', '&nbsp;')
+            severity_str = self.severity_revlut[severity]
             formated_time = stamp
             return severity, '({severity}) {stamp} {user} {message}'.format(severity=severity_str, user=user, stamp=formated_time, message=message)
 
