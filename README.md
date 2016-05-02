@@ -1,4 +1,5 @@
 ## Slideshow Frontend
+[![Build Status](https://travis-ci.org/ext/slideshow-frontend.svg?branch=master)](https://travis-ci.org/ext/slideshow-frontend)
 
 Slideshow is a kiosk-style application for showing text, image and video in a continious loop on monitors and projectors. Content is edited and updated directly in using a webgui. The application is split into two packages, a backend and a frontend. The backend is written in C++ and OpenGL and the frontend using python. Currently the frontend is very GNU/Linux specific and will not run on any other platform but is meant to be as platform independent as possible, as long as it handles OpenGL.
 
