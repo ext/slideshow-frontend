@@ -5,6 +5,7 @@
 
 *.py[oc]
 *.map
+/checkstyle.xml
 
 /js/template.js
 /node_modules
