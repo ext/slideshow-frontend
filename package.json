@@ -8,7 +8,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "grunt test:ci"
   },
   "author": "David Sveningsson <ext@sidvind.com>",
   "license": "AGPL-3.0",
@@ -24,10 +24,12 @@
     "eslint": "^2.8.0",
     "eslint-config-angular": "^0.5.0",
     "eslint-plugin-angular": "^1.0.0",
-    "grunt": "^0.4.5",
+    "eslint-plugin-jasmine": "^1.8.1",
+    "grunt": "^1.0.1",
+    "grunt-cli": "^1.2.0",
     "grunt-contrib-copy": "^1.0.0",
-    "grunt-contrib-uglify": "^0.11.1",
-    "grunt-contrib-watch": "^0.6.1",
+    "grunt-contrib-uglify": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
     "grunt-eslint": "^18.1.0",
     "grunt-html2js": "^0.3.6",
     "grunt-karma": "^0.12.2",
@@ -35,6 +37,7 @@
     "jasmine-core": "^2.4.1",
     "jquery-hoverintent": "1.8.1",
     "karma": "^0.13.22",
-    "karma-jasmine": "^0.3.8"
+    "karma-jasmine": "^0.3.8",
+    "karma-phantomjs-launcher": "^1.0.0"
   }
 }
