@@ -10,7 +10,9 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-sass');
 
 	grunt.registerTask('build', ['copy', 'sass', 'html2js', 'test', 'uglify']);
-	grunt.registerTask('test', ['eslint', 'karma']);
+	grunt.registerTask('build:ci', ['copy', 'sass', 'html2js', 'uglify']);
+	grunt.registerTask('test', ['eslint', 'karma:dev']);
+	grunt.registerTask('test:ci', ['eslint:ci', 'build:ci', 'karma:ci']);
 	grunt.registerTask('default', ['build']);
 
 	grunt.initConfig({
@@ -58,6 +60,13 @@ module.exports = function(grunt){
 				'test/**/*.js',
 				'!js/template.js',
 			],
+			ci: {
+				options: {
+					format: 'checkstyle',
+					outputFile: 'checkstyle.xml',
+				},
+				src: '<%= eslint.build %>',
+			},
 		},
 
 		sass: {
@@ -102,8 +111,13 @@ module.exports = function(grunt){
 		},
 
 		karma: {
-			unit: {
+			dev: {
 				configFile: 'test/karma.conf.js',
+			},
+			ci: {
+				configFile: 'test/karma.conf.js',
+				singleRun: true,
+				reporters: 'dots',
 			},
 		},
 
