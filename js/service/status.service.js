@@ -31,6 +31,10 @@
 					$rootScope.$broadcast('state:change', state);
 				}
 
+				if ( response.data.cache ){
+					$rootScope.$broadcast('state:cache', response.data.cache);
+				}
+
 				cache = state;
 			});
 		}
