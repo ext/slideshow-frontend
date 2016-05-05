@@ -1,4 +1,5 @@
 import json
+import slideshow.cache as cache
 import slideshow.daemon as daemon
 import base
 
@@ -12,4 +13,5 @@ class StatusHandlerV1(base.APIBase):
                 'value': state,
                 'name': daemon.statename(state),
             },
+            'cache': cache.status(),
         })
