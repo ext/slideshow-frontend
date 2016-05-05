@@ -14,7 +14,12 @@ class _CacheRebuilder(threading.Thread):
         self.semaphore = threading.Semaphore(0)
 
     def sync(self, blocking=True):
+        if self.error is not False:
+            return False
         return self.semaphore.acquire(blocking)
+
+    def finished(self):
+        return self.progress == len(self.slides) or self.error is not False
 
     def run(self):
         try:
@@ -45,7 +50,7 @@ def rebuild(slides, resolution):
     global _rebuild
     thread = _rebuild
 
-    if thread is not None:
+    if not (thread is None or thread.finished()):
         raise RuntimeError('Rebuild already in progress')
 
     thread = _CacheRebuilder(slides, resolution)
@@ -54,6 +59,15 @@ def rebuild(slides, resolution):
     _rebuild = thread
     return thread
 
-def rebuild_reset():
+def rebuild_reset(force=False):
     global _rebuild
+    thread = _rebuild
+
+    if force is True or thread is None:
+        _rebuild = None
+        return
+
+    if not thread.finished():
+        raise RuntimeError('Cannot reset while rebuild is in progress')
+
     _rebuild = None

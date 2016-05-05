@@ -19,7 +19,7 @@ class SlideMock(object):
 
 class CacheRebuildTest(unittest.TestCase):
     def tearDown(self):
-        cache.rebuild_reset()
+        cache.rebuild_reset(force=True)
 
     def test_initial_state(self):
         self.assertIsNone(cache.status())
@@ -55,10 +55,22 @@ class CacheRebuildTest(unittest.TestCase):
             self.assertEqual(status['max'], 3)
 
     def test_no_double_rebuild(self):
-        cache.rebuild([], (800,600))
-        self.assertRaises(RuntimeError, cache.rebuild, [], (800,600))
+        slides = [SlideMock()]
+        try:
+            cache.rebuild(slides, (800,600))
+            self.assertRaises(RuntimeError, cache.rebuild, [], (800,600))
+        finally:
+            slides[0].release()
 
     def test_rebuild_after_reset(self):
-        cache.rebuild([], (800,600))
+        thread = cache.rebuild([], (800,600))
         cache.rebuild_reset()
         cache.rebuild([], (800,600))
+
+    def test_no_reset_in_progress(self):
+        slides = [SlideMock()]
+        try:
+            cache.rebuild(slides, (800,600))
+            self.assertRaises(RuntimeError, cache.rebuild_reset)
+        finally:
+            slides[0].release()
