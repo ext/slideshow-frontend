@@ -65,13 +65,13 @@
 				</nav>
 			</header>
 
-			<div id="content" class="container-fluid">
+			<main>
 				<py:if test="flash is not None">
 					<div py:for="severity, message in flash" class="alert alert-${severity}">${message}</div>
 				</py:if>
 
 				${select('*|text()')}
-			</div>
+			</main>
 
 			<footer>
 				<p py:if="username is not None">Logged in as ${username} (<a href="/logout">logout</a>)</p>
