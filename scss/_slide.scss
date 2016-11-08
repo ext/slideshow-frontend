@@ -146,3 +146,14 @@
 .actions {
 	@extend .clearfix;
 }
+
+.assembler.panel {
+	.panel-heading {
+		padding: 0;
+
+		a {
+			padding: $panel-heading-padding;
+			display: block;
+		}
+	}
+}
