@@ -19,25 +19,7 @@
 	</head>
 	</py:match>
 
-	<?python
-		from slideshow.settings import Settings
-
-		class Menu:
-			def __init__(self, *items):
-				self.items = items
-
-			def attrs_li(self, i):
-				c = [self.items[i][0]]
-				if self.items[i][0] == parent:
-					c.append('active')
-				return {'class': ' '.join(c)}
-
-		menu = Menu(
-			('main', _('Main'), '/'),
-			('slides', _('Slides'), '/slides/upload'),
-			('queues', _('Queues'), '/queue'),
-			('maintenance', _('Maintenance'), '/maintenance'))
-	?>
+	<?python from slideshow.settings import Settings ?>
 
 	<py:match path="body" once="true">
 		<body py:attrs="select('@*')" ng-app="slideshow" ng-strict-di="">
@@ -54,13 +36,20 @@
 							<a class="navbar-brand" href="/">${Settings()['Slideshow.Title']}</a>
 						</div>
 
+
+						<?python
+						def menu_attr(item):
+							if item == parent:
+								return {'class': ' '.join([item, 'active'])}
+							else:
+								return {'class': item}
+						?>
 						<div class="collapse navbar-collapse" id="navbar">
 							<ul id="menu" class="nav navbar-nav">
-								<py:for each="(i, (_, title, url)) in enumerate(menu.items)">
-									<li py:attrs="menu.attrs_li(i)" role="presentation">
-										<a href="${url}"><i></i> ${title}</a>
-									</li>
-								</py:for>
+								<li py:attrs="menu_attr('main')"><a href="/"><i></i> Main</a></li>
+								<li py:attrs="menu_attr('slides')"><a href="/slides/upload"><i></i> Slides</a></li>
+								<li py:attrs="menu_attr('queues')"><a href="/queue"><i></i> Queues</a></li>
+								<li py:attrs="menu_attr('maintenance')"><a href="/maintenance"><i></i> Maintenance</a></li>
 							</ul>
 
 							<p class="navbar-text navbar-right daemonstatus" ng-class="vm.stateClass">Status: <strong>{{vm.stateName}}</strong></p>
