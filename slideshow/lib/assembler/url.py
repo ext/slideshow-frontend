@@ -65,4 +65,4 @@ class UrlAssembler(Assembler):
             return resolution
 
     def title(self):
-        return 'Url'
+        return 'Website'

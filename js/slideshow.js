@@ -145,6 +145,12 @@ var slide = (function(){
 $(document).ready(function(){
 	'use strict';
 
+	/* workaround: when clicking the menu dropdown the hash is emptied
+	 * by default which messes with angular routing. */
+	$('a.dropdown-toggle').click(function(e){
+		e.preventDefault();
+	});
+
 	/* enable sorting on main page */
 	queue.sorting();
 

@@ -10,34 +10,19 @@
 	<title>Upload slide</title>
 </head>
 
-<body>
+<body ng-controller="SlideUploadController as vm">
 	<h1>Upload slide</h1>
 
-	<div class="panel-group" id="assemblers" role="tablist" aria-multiselectable="true">
-		<py:for each="i, assembler in enumerate(assemblers)">
-			<div class="assembler panel panel-default">
-				<div class="panel-heading" role="tab" id="assembler-heading-${assembler.name}">
-					<h4 class="panel-title">
-						<a role="button" data-toggle="collapse" data-parent="#assemblers" href="#assembler-${assembler.name}" aria-expanded="${i == 0 and 'true' or 'false'}" aria-controls="assembler-${assembler.name}">
-							${assembler.title()}
-						</a>
-					</h4>
-				</div>
-				<div id="assembler-${assembler.name}" class="panel-collapse collapse ${i == 0 and 'in' or ''}" role="tabpanel" aria-labelledby="assembler-heading-${assembler.name}">
-					<div class="panel-body">
-						<form action="/slides/submit" method="post" enctype="multipart/form-data" accept-charset="utf-8">
-							<input type="hidden" name="assembler" value="${assembler.name}" />
-							<input type="hidden" name="context" value="${context}" />
+	<div py:for="assembler in assemblers" id="assembler-${assembler.name}" class="assembler" ng-if="vm.active === '${assembler.name}'" ng-cloak="">
+		<h2>${assembler.title()}</h2>
 
-							<xi:include href="../../lib/assembler/${assembler.name}.html" />
-							<div py:match="assembler">
-								${select('*')}
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</py:for>
+		<form action="/slides/submit" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+			<input type="hidden" name="assembler" value="${assembler.name}" />
+			<input type="hidden" name="context" value="${context}" />
+
+			<xi:include href="../../lib/assembler/${assembler.name}.html" />
+			<div py:match="assembler">${select('*')}</div>
+		</form>
 	</div>
 </body>
 

@@ -64,16 +64,34 @@ def flash():
     }
     return [(flash_severity.get(i[0], i[0]), i[1]) for i in cherrypy.session.pop('flash', [])]
 
+def assemblers():
+    """Get a list of available assemblers"""
+    from slideshow.lib import assembler
+
+    # get all available assemblers
+    available = assembler.all()
+
+    # manually place image and text first
+    result = [available.pop('text'), available.pop('image')]
+
+    # sort the rest alphabetically
+    result += sorted(available.itervalues())
+
+    return result
+
+
 def render(*args, **kwargs):
     """Function to render the given data to the template specified via the
     ``@output`` decorator.
     """
+
     if args:
         assert len(args) == 1, \
             'Expected exactly one argument, but got %r' % (args,)
         template = loader.load(args[0])
     else:
         template = cherrypy.thread_data.template
+
     ctxt = Context(url=cherrypy.url)
     ctxt.push(kwargs)
     ctxt['parent'] = cherrypy.thread_data.parent
@@ -81,6 +99,7 @@ def render(*args, **kwargs):
     ctxt['daemonstr'] = daemon.statename(daemon.state())
     ctxt['username'] = cherrypy.request.login
     ctxt['flash'] = flash()
+    ctxt['assemblers'] = assemblers()
 
     ctxt['_'] = lambda x: x # trans.ugettext
 

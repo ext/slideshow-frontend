@@ -38,18 +38,25 @@
 
 
 						<?python
-						def menu_attr(item):
+						def menu_attr(item, *args):
 							if item == parent:
-								return {'class': ' '.join([item, 'active'])}
+								return {'class': ' '.join(['active'] + list(args))}
 							else:
-								return {'class': item}
+								return {'class': ' '.join(list(args))}
 						?>
 						<div class="collapse navbar-collapse" id="navbar">
 							<ul id="menu" class="nav navbar-nav">
-								<li py:attrs="menu_attr('main')"><a href="/">Main</a></li>
-								<li py:attrs="menu_attr('slides')"><a href="/slides/upload">Slides</a></li>
-								<li py:attrs="menu_attr('queues')"><a href="/queue">Queues</a></li>
-								<li py:attrs="menu_attr('maintenance')"><a href="/maintenance">Maintenance</a></li>
+								<li py:attrs="menu_attr('main')"><a href="/" class="main">Main</a></li>
+								<li py:attrs="menu_attr('slides', 'dropdown')">
+									<a class="dropdown-toggle slides" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Slides <span class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li py:for="assembler in assemblers">
+											<a href="/slides/upload#/${assembler.name}" class="${assembler.name}">${assembler.title()}</a>
+										</li>
+									</ul>
+								</li>
+								<li py:attrs="menu_attr('queues')"><a href="/queue" class="queues">Queues</a></li>
+								<li py:attrs="menu_attr('maintenance')"><a href="/maintenance" class="maintenance">Maintenance</a></li>
 							</ul>
 
 							<p class="navbar-text navbar-right daemonstatus" ng-class="vm.stateClass">Status: <strong>{{vm.stateName}}</strong></p>

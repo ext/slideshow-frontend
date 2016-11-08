@@ -20,27 +20,38 @@ body {
 }
 
 #menu {
-	li {
-		a::before {
-			@extend .fa;
-			margin-right: 0.5rem;
-			min-width: 15px;
-		}
+	a::before {
+		@extend .fa;
+		margin-right: 0.5rem;
+		min-width: 15px;
+	}
 
-		&.main a::before {
-			@extend .fa-desktop:before;
-		}
+	a.main::before {
+		@extend .fa-desktop:before;
+	}
 
-		&.slides a::before {
-			@extend .fa-picture-o:before;
-		}
+	a.slides::before,
+	a.image::before {
+		@extend .fa-picture-o:before;
+	}
 
-		&.queues a::before {
-			@extend .fa-folder-open:before;
-		}
+	a.queues::before {
+		@extend .fa-folder-open:before;
+	}
 
-		&.maintenance a::before {
-			@extend .fa-wrench:before;
-		}
+	a.maintenance::before {
+		@extend .fa-wrench:before;
+	}
+
+	a.text::before {
+		@extend .fa-font:before;
+	}
+
+	a.url::before {
+		@extend .fa-cloud:before;
+	}
+
+	a.video::before {
+		@extend .fa-video-camera:before;
 	}
 }
