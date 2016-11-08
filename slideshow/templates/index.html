@@ -74,8 +74,14 @@
 			</main>
 
 			<footer>
-				<p py:if="username is not None">Logged in as ${username} (<a href="/logout">logout</a>)</p>
-				<p>Powered by <a href="http://ext.github.com/slideshow">Slideshow 0.5.0</a></p>
+				<nav class="navbar navbar-inverse">
+					<div class="container-fluid">
+						<p class="navbar-text" py:if="username is not None">Logged in as ${username} (<a href="/logout">logout</a>)</p>
+						<div class="navbar-right">
+							<p class="navbar-text">Powered by <a href="http://ext.github.com/slideshow">Slideshow 0.5.0</a></p>
+						</div>
+					</div>
+				</nav>
 			</footer>
 		</body>
 	</py:match>
