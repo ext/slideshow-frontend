@@ -21,24 +21,26 @@ body {
 
 #menu {
 	li {
-		i {
+		a::before {
 			@extend .fa;
+			margin-right: 0.5rem;
+			min-width: 15px;
 		}
 
-		&.main i {
-			@extend .fa-desktop;
+		&.main a::before {
+			@extend .fa-desktop:before;
 		}
 
-		&.slides i {
-			@extend .fa-picture-o;
+		&.slides a::before {
+			@extend .fa-picture-o:before;
 		}
 
-		&.queues i {
-			@extend .fa-folder-open;
+		&.queues a::before {
+			@extend .fa-folder-open:before;
 		}
 
-		&.maintenance i {
-			@extend .fa-wrench;
+		&.maintenance a::before {
+			@extend .fa-wrench:before;
 		}
 	}
 }
