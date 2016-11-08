@@ -22,7 +22,7 @@
 		<py:for each="slide in queue.slides">
 			<div class="item" id="slide_${slide.id}">
 				<div py:attrs="slide.attributes">
-					<img class="preview" width="200" height="200" src="/slides/show/${slide.id}/200/200" />
+					<img class="preview" src="/slides/show/${slide.id}/200/200" />
 					<div class="menu">
 						<span class="slide-zoom" py:if="slide.assembler.is_viewable()"><a href="/slides/show/${slide.id}">Full</a></span>
 						<span class="slide-play" py:if="slide.assembler.is_playable()"><a href="/slides/play/${slide.id}">Play</a></span>

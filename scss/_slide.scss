@@ -34,11 +34,23 @@
 	padding: 8px;
 	display: inline-block;
 	vertical-align: bottom;
+	width: 50%;
+
+	@media screen and (min-width: 690px){
+		width: 33.3%;
+	}
+
+	@media screen and (min-width: 1700px){
+		width: 25%;
+	}
 
 	.placeholder {
 		border: 3px dashed #666;
-		height: 200px;
-		width: 200px;
+		padding-bottom: calc(100% - 6px);
+	}
+
+	img {
+		width: 100%;
 	}
 }
 
