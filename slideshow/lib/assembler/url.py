@@ -22,7 +22,7 @@ class UrlAssembler(Assembler):
 
     @staticmethod
     def _phantomjs_path():
-        return normpath(join(dirname(__file__), '../../node_modules/phantomjs-prebuilt/bin/phantomjs'))
+        return normpath(join(dirname(__file__), '../../../node_modules/phantomjs-prebuilt/bin/phantomjs'))
 
     @staticmethod
     def _rasterize_path():
