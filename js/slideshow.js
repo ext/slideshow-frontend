@@ -142,7 +142,7 @@ var slide = (function(){
 	};
 })();
 
-$(document).ready(function(){
+$(function(){
 	'use strict';
 
 	/* workaround: when clicking the menu dropdown the hash is emptied

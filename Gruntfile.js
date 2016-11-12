@@ -105,6 +105,7 @@ module.exports = function(grunt){
 						'node_modules/angular/angular.js',
 						'node_modules/bootstrap-sass/assets/javascripts/bootstrap.js',
 						'node_modules/jquery-hoverintent/jquery.hoverIntent.js',
+						'node_modules/jquery-ui-dist/jquery-ui.js',
 					],
 				},
 			},
