@@ -6,7 +6,13 @@
   "globals": {
     "inject": true
   },
-  "plugins": ["jasmine", "angular"],
+  "plugins": [
+    "jasmine",
+    "angular"
+  ],
+  "extends": [
+    "plugin:jasmine/recommended"
+  ],
   "rules": {
     "consistent-this": 0
   }
