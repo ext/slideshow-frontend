@@ -17,6 +17,7 @@
     "bootstrap-sass": "^3.3.6",
     "font-awesome": "^4.6.1",
     "jquery": "^2.2.3",
+    "jquery-ui-dist": "^1.12.1",
     "phantomjs-prebuilt": "^2.1.6"
   },
   "devDependencies": {
